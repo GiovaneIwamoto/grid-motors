@@ -1,5 +1,3 @@
-// ABSTRACTION LAYER FOR ACCESSING APP DATA
-
 import { ICar, default as carsSchema } from '../models/Cars';
 import mongoose, { Model } from 'mongoose';
 
