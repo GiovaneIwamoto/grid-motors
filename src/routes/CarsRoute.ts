@@ -13,4 +13,8 @@ route.get('/car', (req: Request, res: Response) => {
     return carsController.GetAllCars(req, res);
 });
 
+route.delete('/car/:id', (req: Request, res: Response) => {
+    return carsController.DeleteCar(req, res);
+});
+
 export default route;

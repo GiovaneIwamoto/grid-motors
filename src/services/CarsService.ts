@@ -1,6 +1,8 @@
 import { CreateCarsDTO } from '../DTO';
 import { CarRepository } from '../repositories';
 import { ICar } from '../models/Cars';
+import { isValid } from 'zod';
+import { isValidObjectId } from 'mongoose';
 
 export default class CarsService {
     _carRepository: CarRepository;
@@ -27,5 +29,17 @@ export default class CarsService {
 
     async GetAllCars(queryParams?: any) {
         return await this._carRepository.findAll(queryParams);
+    }
+
+    async DeleteCarById(id: string) {
+        if (!isValidObjectId(id)) {
+            throw new Error(`Invalid ID format: ${id}`);
+        }
+        const result = await this._carRepository.delete(id);
+
+        if (!result) {
+            throw new Error(`Car with ID ${id} not found`);
+        }
+        return result;
     }
 }

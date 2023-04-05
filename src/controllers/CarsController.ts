@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { CreateCarsDTO } from '../DTO';
 import { CarsService } from '../services';
+import mongoose from 'mongoose';
 
 export default class CarsController {
     carsService: CarsService;
@@ -34,6 +35,21 @@ export default class CarsController {
         } catch (error) {
             const errorMessage: string = (error as Error).message;
             return res.status(400).send({ message: errorMessage });
+        }
+    }
+
+    async DeleteCar(req: Request, res: Response) {
+        try {
+            await this.carsService.DeleteCarById(req.params.id as string);
+            return res.status(204).send();
+        } catch (error) {
+            const errorMessage: string = (error as Error).message;
+
+            if (errorMessage.startsWith('Car with ID')) {
+                return res.status(404).send({ message: errorMessage });
+            } else {
+                return res.status(400).send({ message: 'Invalid ID format' });
+            }
         }
     }
 }

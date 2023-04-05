@@ -16,4 +16,9 @@ export default class CarRepository {
     async findAll(queryParams?: any) {
         return this.CarModel.find(queryParams);
     }
+
+    async delete(id: string) {
+        const deletedCar = await this.CarModel.findByIdAndDelete(id);
+        return deletedCar;
+    }
 }
