@@ -42,4 +42,21 @@ export default class CarsService {
         }
         return result;
     }
+
+    async UpdateCarById(
+        id: string,
+        updateCarDTO: CreateCarsDTO
+    ): Promise<ICar> {
+        if (!isValidObjectId(id)) {
+            throw new Error(`Invalid ID format: ${id}`);
+        }
+
+        const updatedCar = await this._carRepository.update(id, updateCarDTO);
+
+        if (!updatedCar) {
+            throw new Error(`Car with ID ${id} not found`);
+        }
+
+        return updatedCar;
+    }
 }

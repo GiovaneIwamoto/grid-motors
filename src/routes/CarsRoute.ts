@@ -17,4 +17,8 @@ route.delete('/car/:id', (req: Request, res: Response) => {
     return carsController.DeleteCar(req, res);
 });
 
+route.put('/car/:id', (req: Request, res: Response) => {
+    return carsController.UpdateCar(req, res);
+});
+
 export default route;
