@@ -19,4 +19,21 @@ export default class CarsController {
             return res.status(400).send({ message: errorMessage });
         }
     }
+
+    async GetAllCars(req: Request, res: Response) {
+        try {
+            const queryParams = req.query;
+
+            if (Object.keys(queryParams).length) {
+                const data = await this.carsService.GetAllCars(queryParams);
+                return res.status(200).json({ data: data });
+            } else {
+                const data = await this.carsService.GetAllCars();
+                return res.status(200).json({ data: data });
+            }
+        } catch (error) {
+            const errorMessage: string = (error as Error).message;
+            return res.status(400).send({ message: errorMessage });
+        }
+    }
 }

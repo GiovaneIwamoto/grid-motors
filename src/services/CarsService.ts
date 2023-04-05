@@ -24,4 +24,8 @@ export default class CarsService {
             throw error;
         }
     }
+
+    async GetAllCars(queryParams?: any) {
+        return await this._carRepository.findAll(queryParams);
+    }
 }

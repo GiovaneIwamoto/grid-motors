@@ -12,4 +12,8 @@ export default class CarRepository {
         const newCar = new this.CarModel(car);
         return newCar.save();
     }
+
+    async findAll(queryParams?: any) {
+        return this.CarModel.find(queryParams);
+    }
 }

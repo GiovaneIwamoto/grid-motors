@@ -9,4 +9,8 @@ route.post('/car', (req: Request, res: Response) => {
     return carsController.CreateCar(req, res);
 });
 
+route.get('/car', (req: Request, res: Response) => {
+    return carsController.GetAllCars(req, res);
+});
+
 export default route;
