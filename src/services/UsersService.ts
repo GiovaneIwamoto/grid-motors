@@ -128,4 +128,20 @@ export default class UsersServices {
 
         return updatedUser;
     }
+
+    //---------- GET USER BY ID ----------
+
+    async GetUserById(id: string) {
+        if (!isValidObjectId(id)) {
+            throw new Error(`Invalid ID format: ${id}`);
+        }
+
+        const result = await this._userRepository.findById(id);
+
+        if (!result) {
+            throw new Error(`User with ID ${id} not found`);
+        }
+
+        return result;
+    }
 }

@@ -39,6 +39,7 @@ export default class UserRepository {
         });
     }
     // ---------- FIND USER BY ID ----------
+
     async findById(id: string) {
         return this.UserModel.findById(id);
     }

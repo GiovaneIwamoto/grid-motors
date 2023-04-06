@@ -87,4 +87,23 @@ export default class UsersController {
             }
         }
     }
+
+    //---------- GET USER BY ID ----------
+
+    async GetUser(req: Request, res: Response) {
+        try {
+            const data = await this.userService.GetUserById(
+                req.params.id as string
+            );
+            return res.status(200).json({ data: data });
+        } catch (error) {
+            const errorMessage: string = (error as Error).message;
+
+            if (errorMessage.startsWith('User with ID')) {
+                return res.status(404).send({ message: errorMessage });
+            } else {
+                return res.status(400).send({ message: errorMessage });
+            }
+        }
+    }
 }

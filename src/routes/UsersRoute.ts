@@ -29,5 +29,8 @@ route.put('/user/:id', (req: Request, res: Response) => {
 });
 
 //---------- GET USER BY ID ----------
+route.get('/user/:id', (req: Request, res: Response) => {
+    return usersController.GetUser(req, res);
+});
 
 export default route;
