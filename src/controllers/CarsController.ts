@@ -10,6 +10,8 @@ export default class CarsController {
         this.carsService = new CarsService();
     }
 
+    //---------- POST CAR ----------
+
     async CreateCar(req: Request, res: Response) {
         const createCarsDTO: CreateCarsDTO = req.body;
         try {
@@ -20,6 +22,8 @@ export default class CarsController {
             return res.status(400).send({ message: errorMessage });
         }
     }
+
+    //---------- GET ALL CARS ----------
 
     async GetAllCars(req: Request, res: Response) {
         try {
@@ -38,6 +42,8 @@ export default class CarsController {
         }
     }
 
+    //---------- DELETE CAR BY ID ----------
+
     async DeleteCar(req: Request, res: Response) {
         try {
             await this.carsService.DeleteCarById(req.params.id as string);
@@ -52,6 +58,8 @@ export default class CarsController {
             }
         }
     }
+
+    //---------- UPDATE CAR BY ID ----------
 
     async UpdateCar(req: Request, res: Response): Promise<Response> {
         const { id } = req.params;
@@ -75,6 +83,25 @@ export default class CarsController {
                 return res
                     .status(400)
                     .send({ message: 'Invalid params format' });
+            }
+        }
+    }
+
+    //---------- GET CAR BY ID ----------
+
+    async GetCar(req: Request, res: Response) {
+        try {
+            const data = await this.carsService.GetCarById(
+                req.params.id as string
+            );
+            return res.status(200).json({ data: data });
+        } catch (error) {
+            const errorMessage: string = (error as Error).message;
+
+            if (errorMessage.startsWith('Car with ID')) {
+                return res.status(404).send({ message: errorMessage });
+            } else {
+                return res.status(400).send({ message: errorMessage });
             }
         }
     }

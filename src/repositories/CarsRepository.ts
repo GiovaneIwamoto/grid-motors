@@ -9,24 +9,38 @@ export default class CarRepository {
         this.CarModel = mongoose.model<ICar>('Car', carsSchema);
     }
 
+    //---------- POST CAR ----------
+
     async create(car: ICar) {
         const newCar = new this.CarModel(car);
         return newCar.save();
     }
 
+    //---------- GET ALL CARS ----------
+
     async findAll(queryParams?: any) {
         return this.CarModel.find(queryParams);
     }
+
+    //---------- DELETE CAR BY ID ----------
 
     async delete(id: string) {
         const deletedCar = await this.CarModel.findByIdAndDelete(id);
         return deletedCar;
     }
 
+    //---------- UPDATE CAR BY ID ----------
+
     async update(id: string, data: CreateCarsDTO): Promise<ICar | null> {
         return this.CarModel.findByIdAndUpdate(id, data, {
             new: true,
             runValidators: true,
         });
+    }
+
+    //---------- GET CAR BY ID ----------
+
+    async find(id: string) {
+        return this.CarModel.findById(id);
     }
 }

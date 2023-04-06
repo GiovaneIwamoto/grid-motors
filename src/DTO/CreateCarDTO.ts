@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+//---------- DATA TRANSFER OBJECT ----------
+
 export class CreateCarsDTO {
     carModel?: string;
     color?: string;

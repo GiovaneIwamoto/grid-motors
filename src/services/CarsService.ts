@@ -11,6 +11,8 @@ export default class CarsService {
         this._carRepository = new CarRepository();
     }
 
+    //---------- POST CAR ----------
+
     async CreateCar(createCarDTO: CreateCarsDTO) {
         try {
             const car = {
@@ -27,9 +29,13 @@ export default class CarsService {
         }
     }
 
+    //---------- GET ALL CARS ----------
+
     async GetAllCars(queryParams?: any) {
         return await this._carRepository.findAll(queryParams);
     }
+
+    //---------- DELETE CAR BY ID ----------
 
     async DeleteCarById(id: string) {
         if (!isValidObjectId(id)) {
@@ -42,6 +48,8 @@ export default class CarsService {
         }
         return result;
     }
+
+    //---------- UPDATE CAR BY ID ----------
 
     async UpdateCarById(
         id: string,
@@ -58,5 +66,21 @@ export default class CarsService {
         }
 
         return updatedCar;
+    }
+
+    //---------- GET CAR BY ID ----------
+
+    async GetCarById(id: string) {
+        if (!isValidObjectId(id)) {
+            throw new Error(`Invalid ID format: ${id}`);
+        }
+
+        const result = await this._carRepository.find(id);
+
+        if (!result) {
+            throw new Error(`Car with ID ${id} not found`);
+        }
+
+        return result;
     }
 }
