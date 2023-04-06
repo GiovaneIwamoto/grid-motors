@@ -6,3 +6,4 @@
 */
 
 export { default as carsSchema } from './Cars';
+export { default as userSchema } from './Users';

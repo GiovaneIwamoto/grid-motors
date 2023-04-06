@@ -8,3 +8,4 @@
 */
 
 export { CreateCarsDTO } from './CreateCarDTO';
+export { CreateUserDTO } from './CreateUserDTO';

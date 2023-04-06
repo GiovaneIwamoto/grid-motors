@@ -4,3 +4,4 @@
 */
 
 export { default as CarsService } from './CarsService';
+export { default as UsersService } from './UsersService';

@@ -27,7 +27,9 @@ const carsSchema: Schema = new Schema(
         },
         value_per_day: { type: Number, required: true },
         accessories: {
-            type: [{ description: { type: String, required: true } }],
+            type: [
+                { description: { type: String, required: true, unique: true } },
+            ],
             required: [true, 'Accessories are required.'],
             validate: {
                 validator: function (accessories: any[]) {

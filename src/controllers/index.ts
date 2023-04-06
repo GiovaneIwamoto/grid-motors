@@ -6,3 +6,4 @@
 */
 
 export { default as CarsController } from './CarsController';
+export { default as UsersController } from './UsersController';

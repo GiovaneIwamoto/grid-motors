@@ -5,3 +5,4 @@
 */
 
 export { default as CarRepository } from './CarsRepository';
+export { default as UserRepository } from './UsersRepository';
