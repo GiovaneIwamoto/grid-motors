@@ -8,7 +8,7 @@ const usersController = new UsersController();
 //---------- POST USER ----------
 
 route.post('/user', (req: Request, res: Response) => {
-    return usersController.createUser(req, res);
+    return usersController.CreateUser(req, res);
 });
 
 //---------- GET ALL USERS ----------
@@ -24,6 +24,9 @@ route.delete('/user/:id', (req: Request, res: Response) => {
 });
 
 //---------- UPDATE USER BY ID ----------
+route.put('/user/:id', (req: Request, res: Response) => {
+    return usersController.UpdateUser(req, res);
+});
 
 //---------- GET USER BY ID ----------
 

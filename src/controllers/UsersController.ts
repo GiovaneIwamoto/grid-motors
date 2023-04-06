@@ -11,11 +11,11 @@ export default class UsersController {
 
     //---------- POST USER ----------
 
-    async createUser(req: Request, res: Response) {
+    async CreateUser(req: Request, res: Response) {
         try {
             const createUserDTO: CreateUserDTO = req.body;
 
-            const createdUser = await this.userService.createUser(
+            const createdUser = await this.userService.CreateUser(
                 createUserDTO
             );
             return res.status(201).json({ data: createdUser });
@@ -57,6 +57,33 @@ export default class UsersController {
                 return res.status(404).send({ message: errorMessage });
             } else {
                 return res.status(400).send({ message: 'Invalid ID format' });
+            }
+        }
+    }
+
+    //---------- UPDATE USER BY ID ----------
+    async UpdateUser(req: Request, res: Response): Promise<Response> {
+        const { id } = req.params;
+        const createdUsersDTO: CreateUserDTO = req.body;
+
+        try {
+            const updatedUser = await this.userService.UpdateUserById(
+                id,
+                createdUsersDTO
+            );
+
+            return res.status(200).json(updatedUser);
+        } catch (error) {
+            const errorMessage: string = (error as Error).message;
+
+            if (errorMessage.startsWith('User with ID')) {
+                return res.status(404).send({ message: errorMessage });
+            } else if (errorMessage.startsWith('Invalid ID format:')) {
+                return res.status(400).send({ message: errorMessage });
+            } else {
+                return res
+                    .status(400)
+                    .send({ message: 'Invalid params format' });
             }
         }
     }

@@ -13,7 +13,7 @@ export default class UsersServices {
 
     //---------- VIA CEP ----------
 
-    fetchAddressFromCep = async (cep: any) => {
+    FetchAddressFromCep = async (cep: any) => {
         try {
             const response = await axios.get(
                 `https://viacep.com.br/ws/${cep}/json`
@@ -34,9 +34,9 @@ export default class UsersServices {
 
     //---------- POST USER ----------
 
-    async createUser(createUserDTO: CreateUserDTO) {
+    async CreateUser(createUserDTO: CreateUserDTO) {
         try {
-            const addressData = await this.fetchAddressFromCep(
+            const addressData = await this.FetchAddressFromCep(
                 createUserDTO.cep
             );
 
@@ -79,5 +79,53 @@ export default class UsersServices {
             throw new Error(`User with ID ${id} not found`);
         }
         return result;
+    }
+
+    //---------- UPDATE USER BY ID ----------
+
+    async UpdateUserById(
+        id: string,
+        updateUserDTO: CreateUserDTO
+    ): Promise<IUser> {
+        if (!isValidObjectId(id)) {
+            throw new Error(`Invalid ID format: ${id}`);
+        }
+
+        const user = await this._userRepository.findById(id);
+
+        if (!user) {
+            throw new Error(`User with ID ${id} not found`);
+        }
+
+        delete updateUserDTO.patio;
+        delete updateUserDTO.complement;
+        delete updateUserDTO.neighborhood;
+        delete updateUserDTO.locality;
+        delete updateUserDTO.uf;
+
+        if (updateUserDTO.cep !== user.cep) {
+            const addressData = await this.FetchAddressFromCep(
+                updateUserDTO.cep
+            );
+
+            user.patio = addressData.patio;
+            user.complement = addressData.complement;
+            user.neighborhood = addressData.neighborhood;
+            user.locality = addressData.locality;
+            user.uf = addressData.uf;
+
+            await user.save();
+        }
+
+        const updatedUser = await this._userRepository.update(
+            id,
+            updateUserDTO
+        );
+
+        if (!updatedUser) {
+            throw new Error(`User with ID ${id} not found`);
+        }
+
+        return updatedUser;
     }
 }
