@@ -6,10 +6,16 @@ const route = Router();
 const usersController = new UsersController();
 
 //---------- POST USER ----------
+
 route.post('/user', (req: Request, res: Response) => {
     return usersController.createUser(req, res);
 });
+
 //---------- GET ALL USERS ----------
+
+route.get('/user', (req: Request, res: Response) => {
+    return usersController.GetAllUsers(req, res);
+});
 
 //---------- DELETE USER BY ID ----------
 

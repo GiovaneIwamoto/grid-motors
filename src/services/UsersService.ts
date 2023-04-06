@@ -59,4 +59,10 @@ export default class UsersServices {
             throw error;
         }
     }
+
+    //---------- GET ALL USERS ----------
+
+    async GetAllUsers(queryParams?: any) {
+        return await this._userRepository.findAll(queryParams);
+    }
 }

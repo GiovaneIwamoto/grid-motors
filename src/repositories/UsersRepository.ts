@@ -15,4 +15,10 @@ export default class UserRepository {
         await newUser.save();
         return newUser;
     }
+
+    //---------- GET ALL USERS ----------
+
+    async findAll(queryParams?: any) {
+        return this.UserModel.find(queryParams);
+    }
 }

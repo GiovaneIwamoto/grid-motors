@@ -1,6 +1,7 @@
 import { Schema, Document } from 'mongoose';
 
 //---------- INTERFACE ----------
+
 export interface ICar extends Document {
     carModel: string;
     color: string;
@@ -11,6 +12,7 @@ export interface ICar extends Document {
 }
 
 // ---------- SCHEMA ----------
+
 const carsSchema: Schema = new Schema(
     {
         carModel: { type: String, required: true },

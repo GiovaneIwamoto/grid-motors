@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { CreateCarsDTO } from '../DTO';
 import { CarsService } from '../services';
-import mongoose from 'mongoose';
 
 export default class CarsController {
     carsService: CarsService;

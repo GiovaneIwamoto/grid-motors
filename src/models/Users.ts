@@ -4,6 +4,7 @@ import moment from 'moment';
 import Joi, { string } from 'joi';
 
 //---------- INTERFACE ----------
+
 export interface IUser extends Document {
     name: string;
     cpf: string;
@@ -20,6 +21,7 @@ export interface IUser extends Document {
 }
 
 // ---------- SCHEMA ----------
+
 const userSchema: Schema = new Schema(
     {
         name: { type: String, required: true },

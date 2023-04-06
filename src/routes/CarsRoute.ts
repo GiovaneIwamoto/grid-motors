@@ -6,26 +6,31 @@ const route = Router();
 const carsController = new CarsController();
 
 //---------- POST CAR ----------
+
 route.post('/car', (req: Request, res: Response) => {
     return carsController.CreateCar(req, res);
 });
 
 //---------- GET ALL CARS ----------
+
 route.get('/car', (req: Request, res: Response) => {
     return carsController.GetAllCars(req, res);
 });
 
 //---------- DELETE CAR BY ID ----------
+
 route.delete('/car/:id', (req: Request, res: Response) => {
     return carsController.DeleteCar(req, res);
 });
 
 //---------- UPDATE CAR BY ID ----------
+
 route.put('/car/:id', (req: Request, res: Response) => {
     return carsController.UpdateCar(req, res);
 });
 
 //---------- GET CAR BY ID ----------
+
 route.get('/car/:id', (req: Request, res: Response) => {
     return carsController.GetCar(req, res);
 });
