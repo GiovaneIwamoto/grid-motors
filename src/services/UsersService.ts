@@ -1,8 +1,9 @@
-import { CreateUserDTO } from '../DTO';
+import { AuthenticateDTO, CreateUserDTO } from '../DTO';
 import { UserRepository } from '../repositories';
 import { isValidObjectId } from 'mongoose';
 import { IUser } from '../models/Users';
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
 
 export default class UsersServices {
     _userRepository: UserRepository;
@@ -143,5 +144,29 @@ export default class UsersServices {
         }
 
         return result;
+    }
+
+    //---------- AUTHENTICATE USER ----------
+
+    async Authenticate(
+        userAuthenticate: AuthenticateDTO
+    ): Promise<IUser | null> {
+        const user = await this._userRepository.findEmail(
+            userAuthenticate.email
+        );
+
+        if (user && user.password === userAuthenticate.password) {
+            return user;
+        } else {
+            return null;
+        }
+    }
+
+    //---------- GENERATE USER TOKEN ----------
+
+    GenerateJwtToken(user: IUser): string {
+        const payload = { id: user.id, email: user.email };
+        const options = { expiresIn: '1h' };
+        return jwt.sign(payload, 'secret', options);
     }
 }

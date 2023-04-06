@@ -43,4 +43,10 @@ export default class UserRepository {
     async findById(id: string) {
         return this.UserModel.findById(id);
     }
+
+    // ---------- FIND USER BY EMAIL ----------
+
+    async findEmail(email: string) {
+        return this.UserModel.findOne({ email: email });
+    }
 }

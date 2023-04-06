@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { CreateUserDTO } from '../DTO';
+import { AuthenticateDTO, CreateUserDTO } from '../DTO';
 import { UsersService } from '../services';
 
 export default class UsersController {
@@ -104,6 +104,33 @@ export default class UsersController {
             } else {
                 return res.status(400).send({ message: errorMessage });
             }
+        }
+    }
+
+    //---------- AUTHENTICATE USER ----------
+
+    async AuthenticateUser(req: Request, res: Response) {
+        try {
+            const authenticateDTO: AuthenticateDTO = req.body;
+            if (!(authenticateDTO.email && authenticateDTO.password)) {
+                return res
+                    .status(400)
+                    .json({ message: 'Please provide email and password.' });
+            }
+            const user = await this.userService.Authenticate(authenticateDTO);
+            if (user != null) {
+                const token = this.userService.GenerateJwtToken(user);
+                return res.status(200).json({
+                    message: 'Logged in successfully!',
+                    token,
+                });
+            } else {
+                return res
+                    .status(400)
+                    .json({ message: 'Invalid email or password!' });
+            }
+        } catch (err) {
+            return res.status(400).json({ message: err });
         }
     }
 }

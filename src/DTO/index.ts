@@ -9,3 +9,4 @@
 
 export { CreateCarsDTO } from './CreateCarDTO';
 export { CreateUserDTO } from './CreateUserDTO';
+export { AuthenticateDTO } from './AuthenticateDTO';

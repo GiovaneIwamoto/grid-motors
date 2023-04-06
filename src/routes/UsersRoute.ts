@@ -24,13 +24,21 @@ route.delete('/user/:id', (req: Request, res: Response) => {
 });
 
 //---------- UPDATE USER BY ID ----------
+
 route.put('/user/:id', (req: Request, res: Response) => {
     return usersController.UpdateUser(req, res);
 });
 
 //---------- GET USER BY ID ----------
+
 route.get('/user/:id', (req: Request, res: Response) => {
     return usersController.GetUser(req, res);
+});
+
+//---------- AUTHENTICATE USER ----------
+
+route.post('/authenticate', (req: Request, res: Response) => {
+    return usersController.AuthenticateUser(req, res);
 });
 
 export default route;
