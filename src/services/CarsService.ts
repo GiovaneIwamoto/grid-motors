@@ -1,8 +1,7 @@
 import { CreateCarsDTO } from '../DTO';
 import { CarRepository } from '../repositories';
-import { ICar } from '../models/Cars';
-import { isValid } from 'zod';
 import { isValidObjectId } from 'mongoose';
+import { ICar } from '../models/Cars';
 
 export default class CarsService {
     _carRepository: CarRepository;

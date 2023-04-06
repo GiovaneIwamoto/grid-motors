@@ -21,4 +21,11 @@ export default class UserRepository {
     async findAll(queryParams?: any) {
         return this.UserModel.find(queryParams);
     }
+
+    //---------- DELETE USER BY ID ----------
+
+    async delete(id: string) {
+        const deletedUser = await this.UserModel.findByIdAndDelete(id);
+        return deletedUser;
+    }
 }

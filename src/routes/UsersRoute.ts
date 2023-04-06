@@ -19,6 +19,10 @@ route.get('/user', (req: Request, res: Response) => {
 
 //---------- DELETE USER BY ID ----------
 
+route.delete('/user/:id', (req: Request, res: Response) => {
+    return usersController.DeleteUser(req, res);
+});
+
 //---------- UPDATE USER BY ID ----------
 
 //---------- GET USER BY ID ----------

@@ -1,5 +1,6 @@
 import { CreateUserDTO } from '../DTO';
 import { UserRepository } from '../repositories';
+import { isValidObjectId } from 'mongoose';
 import { IUser } from '../models/Users';
 import axios from 'axios';
 
@@ -64,5 +65,19 @@ export default class UsersServices {
 
     async GetAllUsers(queryParams?: any) {
         return await this._userRepository.findAll(queryParams);
+    }
+
+    //---------- DELETE USER BY ID ----------
+
+    async DeleteUserById(id: string) {
+        if (!isValidObjectId(id)) {
+            throw new Error(`Invalid ID format: ${id}`);
+        }
+        const result = await this._userRepository.delete(id);
+
+        if (!result) {
+            throw new Error(`User with ID ${id} not found`);
+        }
+        return result;
     }
 }

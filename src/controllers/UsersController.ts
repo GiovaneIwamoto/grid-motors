@@ -43,4 +43,21 @@ export default class UsersController {
             return res.status(400).send({ message: errorMessage });
         }
     }
+
+    //---------- DELETE USER BY ID ----------
+
+    async DeleteUser(req: Request, res: Response) {
+        try {
+            await this.userService.DeleteUserById(req.params.id as string);
+            return res.status(204).send();
+        } catch (error) {
+            const errorMessage: string = (error as Error).message;
+
+            if (errorMessage.startsWith('User with ID')) {
+                return res.status(404).send({ message: errorMessage });
+            } else {
+                return res.status(400).send({ message: 'Invalid ID format' });
+            }
+        }
+    }
 }
