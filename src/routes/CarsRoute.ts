@@ -35,4 +35,13 @@ route.get('/car/:id', (req: Request, res: Response) => {
     return carsController.GetCar(req, res);
 });
 
+//---------- UPDATE CAR ACCESSORY ----------
+
+route.patch(
+    '/car/:carId/accessories/:accessoryId',
+    (req: Request, res: Response) => {
+        return carsController.UpdateAccessories(req, res);
+    }
+);
+
 export default route;

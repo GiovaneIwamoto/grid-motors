@@ -1,4 +1,4 @@
-import { CreateCarsDTO } from '../DTO';
+import { AccessoriesDTO, CreateCarsDTO } from '../DTO';
 import { CarRepository } from '../repositories';
 import { isValidObjectId } from 'mongoose';
 import { ICar } from '../models/Cars';
@@ -81,5 +81,36 @@ export default class CarsService {
         }
 
         return result;
+    }
+
+    //---------- UPDATE CAR ACCESSORY ----------
+
+    async UpdateAccessoryById(
+        carId: String,
+        accessoryId: String,
+        accessoriesDTO: { description?: string }
+    ): Promise<ICar> {
+        if (!isValidObjectId(carId)) {
+            throw new Error(`Invalid Car ID format: ${carId}`);
+        }
+
+        if (!isValidObjectId(accessoryId)) {
+            throw new Error(`Invalid Accessory ID format: ${accessoryId}`);
+        }
+
+        if (!accessoriesDTO.description) {
+            throw new Error(`Description is required`);
+        }
+
+        const updatedCar = await this._carRepository.updateAccessory(
+            carId,
+            accessoryId,
+            accessoriesDTO
+        );
+
+        if (!updatedCar) {
+            throw new Error(`Car or Accessory with ID: ${carId} not found`);
+        }
+        return updatedCar;
     }
 }

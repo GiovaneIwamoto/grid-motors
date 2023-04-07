@@ -1,4 +1,4 @@
-import { CreateCarsDTO } from '../DTO';
+import { AccessoriesDTO, CreateCarsDTO } from '../DTO';
 import { ICar, default as carsSchema } from '../models/Cars';
 import mongoose, { Model } from 'mongoose';
 
@@ -42,5 +42,25 @@ export default class CarRepository {
 
     async find(id: string) {
         return this.CarModel.findById(id);
+    }
+
+    //---------- UPDATE CAR ----------
+    async updateAccessory(
+        carId: String,
+        accessoryId: String,
+        data: { description?: string }
+    ): Promise<ICar | null> {
+        try {
+            const updatedCar = await this.CarModel.findOneAndUpdate(
+                { _id: carId, 'accessories._id': accessoryId },
+                { $set: { 'accessories.$.description': data.description } },
+                { new: true }
+            );
+
+            return updatedCar;
+        } catch (error) {
+            const errorMessage: string = (error as Error).message;
+            throw new Error(`Accessory not found: ${errorMessage}`);
+        }
     }
 }

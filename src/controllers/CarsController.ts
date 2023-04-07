@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { CreateCarsDTO } from '../DTO';
+import { AccessoriesDTO } from '../DTO';
 import { CarsService } from '../services';
 
 export default class CarsController {
@@ -101,6 +102,38 @@ export default class CarsController {
                 return res.status(404).send({ message: errorMessage });
             } else {
                 return res.status(400).send({ message: errorMessage });
+            }
+        }
+    }
+
+    //---------- UPDATE CAR ACCESSORY ----------
+
+    async UpdateAccessories(req: Request, res: Response): Promise<Response> {
+        try {
+            const carId = req.params.carId;
+            const accessoryId = req.params.accessoryId;
+
+            const accessoriesDTO: { description?: string } = req.body;
+
+            const data = await this.carsService.UpdateAccessoryById(
+                carId,
+                accessoryId,
+                accessoriesDTO
+            );
+            return res.status(200).json({ data: data });
+        } catch (error) {
+            const errorMessage: string = (error as Error).message;
+
+            if (errorMessage.startsWith('Invalid Car ID format:')) {
+                return res.status(400).send({ message: errorMessage });
+            } else if (
+                errorMessage.startsWith('Invalid Accessory ID format:')
+            ) {
+                return res.status(400).send({ message: errorMessage });
+            } else if (errorMessage.startsWith('Description is required')) {
+                return res.status(400).send({ message: errorMessage });
+            } else {
+                return res.status(404).send({ message: errorMessage });
             }
         }
     }
