@@ -13,6 +13,10 @@ route.post('/reserve', authMiddleware, (req: Request, res: Response) => {
 
 //---------- GET ALL RESERVES ----------
 
+route.get('/reserve', authMiddleware, (req: Request, res: Response) => {
+    return reservesController.GetAllReserves(req, res);
+});
+
 //---------- DELETE RESERVE BY ID ----------
 
 //---------- UPDATE RESERVE BY ID ----------

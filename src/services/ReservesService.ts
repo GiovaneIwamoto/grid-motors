@@ -50,4 +50,10 @@ export default class ReservesService {
             console.log('Error');
         }
     }
+
+    //---------- GET ALL RESERVES ----------
+
+    async GetAllReserves(queryParams?: any) {
+        return await this._reserveRepository.findAll(queryParams);
+    }
 }

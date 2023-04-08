@@ -16,4 +16,10 @@ export default class ReserveRepository {
         console.log(newReserve);
         return newReserve.save();
     }
+
+    //---------- GET ALL RESERVES ----------
+
+    async findAll(queryParams?: any) {
+        return this.ReserveModel.find(queryParams);
+    }
 }
