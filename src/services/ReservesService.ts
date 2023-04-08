@@ -92,4 +92,20 @@ export default class ReservesService {
 
         return updatedReserve;
     }
+
+    //---------- GET RESERVE BY ID ----------
+
+    async GetReserveById(id: string) {
+        if (!isValidObjectId(id)) {
+            throw new Error(`Invalid ID format: ${id}`);
+        }
+
+        const result = await this._reserveRepository.find(id);
+
+        if (!result) {
+            throw new Error(`Reserve with ID ${id} not found`);
+        }
+
+        return result;
+    }
 }

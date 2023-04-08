@@ -31,4 +31,8 @@ route.put('/reserve/:id', authMiddleware, (req: Request, res: Response) => {
 
 //---------- GET RESERVE BY ID ----------
 
+route.get('/reserve/:id', authMiddleware, (req: Request, res: Response) => {
+    return reservesController.GetReserve(req, res);
+});
+
 export default route;

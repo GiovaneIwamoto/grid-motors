@@ -91,4 +91,23 @@ export default class ReservesController {
             }
         }
     }
+
+    //---------- GET RESERVE BY ID ----------
+
+    async GetReserve(req: Request, res: Response) {
+        try {
+            const data = await this.reservesService.GetReserveById(
+                req.params.id as string
+            );
+            return res.status(200).json({ data: data });
+        } catch (error) {
+            const errorMessage: string = (error as Error).message;
+
+            if (errorMessage.startsWith('Reserve with ID')) {
+                return res.status(404).send({ message: errorMessage });
+            } else {
+                return res.status(400).send({ message: errorMessage });
+            }
+        }
+    }
 }

@@ -38,4 +38,10 @@ export default class ReserveRepository {
             runValidators: true,
         });
     }
+
+    //---------- GET RESERVE BY ID ----------
+
+    async find(id: string) {
+        return this.ReserveModel.findById(id);
+    }
 }
