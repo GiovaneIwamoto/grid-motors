@@ -20,7 +20,12 @@ export default class ReservesController {
             return res.status(201).json({ data: createdReserve });
         } catch (error) {
             const errorMessage: string = (error as Error).message;
-            return res.status(400).send({ message: errorMessage });
+
+            if (errorMessage.startsWith('Car with ID:')) {
+                return res.status(404).send({ message: errorMessage });
+            } else {
+                return res.status(400).send({ message: errorMessage });
+            }
         }
     }
 

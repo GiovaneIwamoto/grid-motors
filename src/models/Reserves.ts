@@ -16,7 +16,16 @@ export interface IReserve extends Document {
 const reservesSchema: Schema = new Schema(
     {
         id_user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-        start_date: { type: Date, required: true },
+        start_date: {
+            type: Date,
+            required: true,
+            validate: {
+                validator: function (this: IReserve, value: Date): boolean {
+                    return value < this.end_date;
+                },
+                message: 'Start date must be before end date.',
+            },
+        },
         end_date: { type: Date, required: true },
         id_car: {
             type: mongoose.Schema.Types.ObjectId,

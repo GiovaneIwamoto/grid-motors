@@ -13,7 +13,6 @@ export default class ReserveRepository {
 
     async create(reserve: IReserve) {
         const newReserve = new this.ReserveModel(reserve);
-        console.log(newReserve);
         return newReserve.save();
     }
 
