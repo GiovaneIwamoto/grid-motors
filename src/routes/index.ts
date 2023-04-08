@@ -5,3 +5,4 @@
 
 export { default as CarsRoute } from './CarsRoute';
 export { default as UsersRoute } from './UsersRoute';
+export { default as ReservesRoute } from './ReservesRoute';

@@ -1,13 +1,13 @@
 import { Router, Request, Response } from 'express';
 import { CarsController } from '../controllers';
-// import { authMiddleware } from '../middlewares/AuthMiddleware'
+import { authMiddleware } from '../middlewares/AuthMiddleware';
 
 const route = Router();
 const carsController = new CarsController();
 
 //---------- POST CAR ----------
 
-route.post('/car', (req: Request, res: Response) => {
+route.post('/car', authMiddleware, (req: Request, res: Response) => {
     return carsController.CreateCar(req, res);
 });
 
@@ -19,19 +19,19 @@ route.get('/car', (req: Request, res: Response) => {
 
 //---------- DELETE CAR BY ID ----------
 
-route.delete('/car/:id', (req: Request, res: Response) => {
+route.delete('/car/:id', authMiddleware, (req: Request, res: Response) => {
     return carsController.DeleteCar(req, res);
 });
 
 //---------- UPDATE CAR BY ID ----------
 
-route.put('/car/:id', (req: Request, res: Response) => {
+route.put('/car/:id', authMiddleware, (req: Request, res: Response) => {
     return carsController.UpdateCar(req, res);
 });
 
 //---------- GET CAR BY ID ----------
 
-route.get('/car/:id', (req: Request, res: Response) => {
+route.get('/car/:id', authMiddleware, (req: Request, res: Response) => {
     return carsController.GetCar(req, res);
 });
 
@@ -39,6 +39,7 @@ route.get('/car/:id', (req: Request, res: Response) => {
 
 route.patch(
     '/car/:carId/accessories/:accessoryId',
+    authMiddleware,
     (req: Request, res: Response) => {
         return carsController.UpdateAccessories(req, res);
     }

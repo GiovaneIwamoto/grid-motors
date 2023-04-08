@@ -44,7 +44,8 @@ export default class CarRepository {
         return this.CarModel.findById(id);
     }
 
-    //---------- UPDATE CAR ----------
+    //---------- UPDATE CAR ACCESSORY ----------
+    
     async updateAccessory(
         carId: String,
         accessoryId: String,

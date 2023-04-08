@@ -7,3 +7,4 @@
 
 export { default as carsSchema } from './Cars';
 export { default as userSchema } from './Users';
+export { default as reservesSchema } from './Reserves';

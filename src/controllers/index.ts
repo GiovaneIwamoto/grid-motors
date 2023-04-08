@@ -7,3 +7,4 @@
 
 export { default as CarsController } from './CarsController';
 export { default as UsersController } from './UsersController';
+export { default as ReservesController } from './ReservesController';

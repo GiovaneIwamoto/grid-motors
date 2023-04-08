@@ -5,7 +5,7 @@ import express from 'express';
 
 import { Router, Request, Response } from 'express';
 import { Connection } from 'mongoose';
-import { CarsRoute, UsersRoute } from './routes';
+import { CarsRoute, ReservesRoute, UsersRoute } from './routes';
 
 dotenv.config({ path: './config.env' });
 
@@ -36,3 +36,4 @@ mongoose
 const baseRoute = '/api/v1';
 app.use(baseRoute, CarsRoute);
 app.use(baseRoute, UsersRoute);
+app.use(baseRoute, ReservesRoute);

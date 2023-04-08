@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { UsersController } from '../controllers';
-// import { authMiddleware } from '../middlewares/AuthMiddleware'
+import { authMiddleware } from '../middlewares/AuthMiddleware';
 
 const route = Router();
 const usersController = new UsersController();
@@ -13,25 +13,25 @@ route.post('/user', (req: Request, res: Response) => {
 
 //---------- GET ALL USERS ----------
 
-route.get('/user', (req: Request, res: Response) => {
+route.get('/user', authMiddleware, (req: Request, res: Response) => {
     return usersController.GetAllUsers(req, res);
 });
 
 //---------- DELETE USER BY ID ----------
 
-route.delete('/user/:id', (req: Request, res: Response) => {
+route.delete('/user/:id', authMiddleware, (req: Request, res: Response) => {
     return usersController.DeleteUser(req, res);
 });
 
 //---------- UPDATE USER BY ID ----------
 
-route.put('/user/:id', (req: Request, res: Response) => {
+route.put('/user/:id', authMiddleware, (req: Request, res: Response) => {
     return usersController.UpdateUser(req, res);
 });
 
 //---------- GET USER BY ID ----------
 
-route.get('/user/:id', (req: Request, res: Response) => {
+route.get('/user/:id', authMiddleware, (req: Request, res: Response) => {
     return usersController.GetUser(req, res);
 });
 
