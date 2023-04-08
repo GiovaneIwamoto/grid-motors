@@ -13,7 +13,15 @@ export default class UsersController {
 
     async CreateUser(req: Request, res: Response) {
         try {
-            const createUserDTO: CreateUserDTO = req.body;
+            const createUserDTO: CreateUserDTO | undefined = req.body;
+
+            if (
+                !createUserDTO ||
+                !createUserDTO.cpf ||
+                createUserDTO.cpf.length > 11
+            ) {
+                throw new Error('CPF must have at most 11 digits');
+            }
 
             const createdUser = await this.userService.CreateUser(
                 createUserDTO
@@ -64,9 +72,17 @@ export default class UsersController {
     //---------- UPDATE USER BY ID ----------
     async UpdateUser(req: Request, res: Response): Promise<Response> {
         const { id } = req.params;
-        const createdUsersDTO: CreateUserDTO = req.body;
+        const createdUsersDTO: CreateUserDTO | undefined = req.body;
 
         try {
+            if (
+                !createdUsersDTO ||
+                !createdUsersDTO.cpf ||
+                createdUsersDTO.cpf.length > 11
+            ) {
+                throw new Error('CPF must have at most 11 digits');
+            }
+
             const updatedUser = await this.userService.UpdateUserById(
                 id,
                 createdUsersDTO
