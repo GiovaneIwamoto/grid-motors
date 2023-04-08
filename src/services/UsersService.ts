@@ -166,7 +166,7 @@ export default class UsersServices {
 
     GenerateJwtToken(user: IUser): string {
         const payload = { id: user.id, email: user.email };
-        const options = { expiresIn: '1h' };
+        const options = { expiresIn: '12h' };
         return jwt.sign(payload, 'secret', options);
     }
 }

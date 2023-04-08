@@ -63,4 +63,32 @@ export default class ReservesController {
             }
         }
     }
+
+    //---------- UPDATE RESERVE BY ID ----------
+
+    async UpdateReserve(req: Request, res: Response): Promise<Response> {
+        const { id } = req.params;
+        const createReserveDTO: CreateReserveDTO = req.body;
+
+        try {
+            const updatedReserve = await this.reservesService.UpdateReserveById(
+                id,
+                createReserveDTO
+            );
+
+            return res.status(200).json(updatedReserve);
+        } catch (error) {
+            const errorMessage: string = (error as Error).message;
+
+            if (errorMessage.startsWith('Reserve with ID')) {
+                return res.status(404).send({ message: errorMessage });
+            } else if (errorMessage.startsWith('Invalid ID format:')) {
+                return res.status(400).send({ message: errorMessage });
+            } else {
+                return res
+                    .status(400)
+                    .send({ message: 'Invalid params format' });
+            }
+        }
+    }
 }

@@ -29,4 +29,13 @@ export default class ReserveRepository {
         const deletedReserve = await this.ReserveModel.findByIdAndDelete(id);
         return deletedReserve;
     }
+
+    //---------- UPDATE RESERVE BY ID ----------
+
+    async update(id: string, data: CreateReserveDTO): Promise<IReserve | null> {
+        return this.ReserveModel.findByIdAndUpdate(id, data, {
+            new: true,
+            runValidators: true,
+        });
+    }
 }

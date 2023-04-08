@@ -25,6 +25,10 @@ route.delete('/reserve/:id', authMiddleware, (req: Request, res: Response) => {
 
 //---------- UPDATE RESERVE BY ID ----------
 
+route.put('/reserve/:id', authMiddleware, (req: Request, res: Response) => {
+    return reservesController.UpdateReserve(req, res);
+});
+
 //---------- GET RESERVE BY ID ----------
 
 export default route;

@@ -70,4 +70,26 @@ export default class ReservesService {
         }
         return result;
     }
+
+    //---------- UPDATE RESERVE BY ID ----------
+
+    async UpdateReserveById(
+        id: string,
+        updateReserveDTO: CreateReserveDTO
+    ): Promise<IReserve> {
+        if (!isValidObjectId(id)) {
+            throw new Error(`Invalid ID format: ${id}`);
+        }
+
+        const updatedReserve = await this._reserveRepository.update(
+            id,
+            updateReserveDTO
+        );
+
+        if (!updatedReserve) {
+            throw new Error(`Reserve with ID ${id} not found`);
+        }
+
+        return updatedReserve;
+    }
 }
