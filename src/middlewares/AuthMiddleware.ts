@@ -17,4 +17,14 @@ export const authMiddleware = (
     }
 };
 
+export const getUserIdFromToken = (token: string): string => {
+    try {
+        const decoded = jwt.verify(token, 'secret');
+        const result = (decoded as any).id;
+        return result;
+    } catch (error) {
+        throw new Error('Invalid token');
+    }
+};
+
 export default authMiddleware;

@@ -13,9 +13,12 @@ export default class ReservesController {
 
     async CreateReserve(req: Request, res: Response) {
         const createReserveDTO: CreateReserveDTO = req.body;
+        const token: string = req.headers.authorization?.split(' ')[1] || '';
+
         try {
             const createdReserve = await this.reservesService.CreateReserve(
-                createReserveDTO
+                createReserveDTO,
+                token
             );
             return res.status(201).json({ data: createdReserve });
         } catch (error) {

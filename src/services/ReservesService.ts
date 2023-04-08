@@ -4,6 +4,7 @@ import { CarRepository } from '../repositories';
 import { isValidObjectId } from 'mongoose';
 import { IReserve } from '../models/Reserves';
 import jwt from 'jsonwebtoken';
+import { getUserIdFromToken } from '../middlewares/AuthMiddleware';
 
 export default class ReservesService {
     _reserveRepository: ReserveRepository;
@@ -16,7 +17,7 @@ export default class ReservesService {
 
     //---------- POST RESERVE ----------
 
-    async CreateReserve(createReserveDTO: CreateReserveDTO) {
+    async CreateReserve(createReserveDTO: CreateReserveDTO, token: string) {
         const car = await this._carRepository.find(createReserveDTO.id_car);
 
         if (!car) {
@@ -34,11 +35,10 @@ export default class ReservesService {
 
         const final_value = car!.value_per_day * days;
 
-        // let id_user;
-        // const decodedToken: any = jwt.verify(token!, 'secret');
-        // id_user = decodedToken._id;
+        const id_user = getUserIdFromToken(token);
 
         const reserve = {
+            id_user,
             start_date: createReserveDTO.start_date,
             end_date: createReserveDTO.end_date,
             id_car: createReserveDTO.id_car,
