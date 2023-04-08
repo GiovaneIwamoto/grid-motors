@@ -56,4 +56,18 @@ export default class ReservesService {
     async GetAllReserves(queryParams?: any) {
         return await this._reserveRepository.findAll(queryParams);
     }
+
+    //---------- DELETE RESERVE BY ID ----------
+
+    async DeleteReserveById(id: string) {
+        if (!isValidObjectId(id)) {
+            throw new Error(`Invalid ID format: ${id}`);
+        }
+        const result = await this._reserveRepository.delete(id);
+
+        if (!result) {
+            throw new Error(`Reserve with ID ${id} not found`);
+        }
+        return result;
+    }
 }

@@ -44,4 +44,23 @@ export default class ReservesController {
             return res.status(400).send({ message: errorMessage });
         }
     }
+
+    //---------- DELETE RESERVE BY ID ----------
+
+    async DeleteReserve(req: Request, res: Response) {
+        try {
+            await this.reservesService.DeleteReserveById(
+                req.params.id as string
+            );
+            return res.status(204).send();
+        } catch (error) {
+            const errorMessage: string = (error as Error).message;
+
+            if (errorMessage.startsWith('Reserve with ID')) {
+                return res.status(404).send({ message: errorMessage });
+            } else {
+                return res.status(400).send({ message: 'Invalid ID format' });
+            }
+        }
+    }
 }

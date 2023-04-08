@@ -22,4 +22,11 @@ export default class ReserveRepository {
     async findAll(queryParams?: any) {
         return this.ReserveModel.find(queryParams);
     }
+
+    //---------- DELETE RESERVE BY ID ----------
+
+    async delete(id: string) {
+        const deletedReserve = await this.ReserveModel.findByIdAndDelete(id);
+        return deletedReserve;
+    }
 }

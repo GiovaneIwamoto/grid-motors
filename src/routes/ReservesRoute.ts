@@ -19,6 +19,10 @@ route.get('/reserve', authMiddleware, (req: Request, res: Response) => {
 
 //---------- DELETE RESERVE BY ID ----------
 
+route.delete('/reserve/:id', authMiddleware, (req: Request, res: Response) => {
+    return reservesController.DeleteReserve(req, res);
+});
+
 //---------- UPDATE RESERVE BY ID ----------
 
 //---------- GET RESERVE BY ID ----------
