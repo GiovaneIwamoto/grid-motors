@@ -43,4 +43,30 @@ export default class ReserveRepository {
     async find(id: string) {
         return this.ReserveModel.findById(id);
     }
+
+    //---------- FIND BY CAR AND DATE ----------
+
+    async findByCarAndDate(carId: string, startDate: Date, endDate: Date) {
+        const reservations = await this.ReserveModel.find({
+            id_car: carId,
+            start_date: { $lte: endDate },
+            end_date: { $gte: startDate },
+        });
+        if (reservations.length > 0) {
+            return true;
+        }
+    }
+
+    //---------- FIND BY USER AND DATE ----------
+
+    async findByUserAndDate(id_user: string, startDate: Date, endDate: Date) {
+        const reservations = await this.ReserveModel.find({
+            id_user: id_user,
+            start_date: { $lte: endDate },
+            end_date: { $gte: startDate },
+        });
+        if (reservations.length > 0) {
+            return true;
+        }
+    }
 }

@@ -50,6 +50,32 @@ export default class ReservesService {
             throw new Error('User is not qualified to create a reservation');
         }
 
+        // Not more than one reservation of the same car in the same day
+        const existingCarReserve =
+            await this._reserveRepository.findByCarAndDate(
+                createReserveDTO.id_car,
+                createReserveDTO.start_date,
+                createReserveDTO.end_date
+            );
+        if (existingCarReserve) {
+            throw new Error(
+                `Unavailable Car: ${createReserveDTO.id_car} is already reserved for the requested period`
+            );
+        }
+
+        // No more than one reservation is allowed in the same period by the same user  (USER CANNOT HIRE A FERRARI AND CIVIC FOR THE SAME DAY)
+        const existingUserReserve =
+            await this._reserveRepository.findByUserAndDate(
+                id_user,
+                createReserveDTO.start_date,
+                createReserveDTO.end_date
+            );
+        if (existingUserReserve) {
+            throw new Error(
+                `User: ${id_user} already have a reserved car for the requested period`
+            );
+        }
+
         const reserve = {
             id_user,
             start_date: createReserveDTO.start_date,
