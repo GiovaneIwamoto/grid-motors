@@ -26,6 +26,13 @@ export default class ReservesController {
 
             if (errorMessage.startsWith('Car with ID:')) {
                 return res.status(404).send({ message: errorMessage });
+            }
+            if (
+                errorMessage.startsWith(
+                    'User is not qualified to create a reservation'
+                )
+            ) {
+                return res.status(400).send({ message: errorMessage });
             } else {
                 return res.status(400).send({ message: errorMessage });
             }

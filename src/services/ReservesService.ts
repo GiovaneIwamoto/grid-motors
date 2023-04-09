@@ -1,18 +1,20 @@
 import { CreateReserveDTO } from '../DTO';
-import { ReserveRepository } from '../repositories';
+import { ReserveRepository, UserRepository } from '../repositories';
 import { CarRepository } from '../repositories';
 import { isValidObjectId } from 'mongoose';
 import { IReserve } from '../models/Reserves';
-import jwt from 'jsonwebtoken';
 import { getUserIdFromToken } from '../middlewares/AuthMiddleware';
+import jwt from 'jsonwebtoken';
 
 export default class ReservesService {
     _reserveRepository: ReserveRepository;
     _carRepository: CarRepository;
+    _userRepository: UserRepository;
 
     constructor() {
         this._reserveRepository = new ReserveRepository();
         this._carRepository = new CarRepository();
+        this._userRepository = new UserRepository();
     }
 
     //---------- POST RESERVE ----------
@@ -20,12 +22,14 @@ export default class ReservesService {
     async CreateReserve(createReserveDTO: CreateReserveDTO, token: string) {
         const car = await this._carRepository.find(createReserveDTO.id_car);
 
+        // Find if car is registered
         if (!car) {
             throw new Error(
                 `Car with ID: ${createReserveDTO.id_car} not found.`
             );
         }
 
+        // Date and Final Value calculation
         const startDate = new Date(createReserveDTO.start_date);
         const endDate = new Date(createReserveDTO.end_date);
 
@@ -35,7 +39,16 @@ export default class ReservesService {
 
         const final_value = car!.value_per_day * days;
 
+        // Get User ID from Token
         const id_user = getUserIdFromToken(token);
+
+        // Get User Qualification from token
+        const obj_user = await this._userRepository.findById(id_user);
+        const qualified_user = obj_user?.qualified;
+
+        if (qualified_user !== 'yes') {
+            throw new Error('User is not qualified to create a reservation');
+        }
 
         const reserve = {
             id_user,
