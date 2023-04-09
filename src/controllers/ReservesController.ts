@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { CreateReserveDTO } from '../DTO';
+import { UpdateReserveDTO } from '../DTO';
 import { ReservesService } from '../services';
 
 export default class ReservesController {
@@ -83,12 +84,12 @@ export default class ReservesController {
 
     async UpdateReserve(req: Request, res: Response): Promise<Response> {
         const { id } = req.params;
-        const createReserveDTO: CreateReserveDTO = req.body;
+        const updateReserveDTO: UpdateReserveDTO = req.body;
 
         try {
             const updatedReserve = await this.reservesService.UpdateReserveById(
                 id,
-                createReserveDTO
+                updateReserveDTO
             );
 
             return res.status(200).json(updatedReserve);
@@ -99,10 +100,10 @@ export default class ReservesController {
                 return res.status(404).send({ message: errorMessage });
             } else if (errorMessage.startsWith('Invalid ID format:')) {
                 return res.status(400).send({ message: errorMessage });
+            } else if (errorMessage.startsWith('Car with ID')) {
+                return res.status(404).send({ message: errorMessage });
             } else {
-                return res
-                    .status(400)
-                    .send({ message: 'Invalid params format' });
+                return res.status(400).send({ message: errorMessage });
             }
         }
     }

@@ -12,3 +12,4 @@ export { CreateUserDTO } from './CreateUserDTO';
 export { AuthenticateDTO } from './AuthenticateDTO';
 export { AccessoriesDTO } from './AccessoriesDTO';
 export { CreateReserveDTO } from './CreateReserveDTOS';
+export { UpdateReserveDTO } from './UpdateReserveDTO';

@@ -1,4 +1,4 @@
-import { CreateReserveDTO } from '../DTO';
+import { CreateReserveDTO, UpdateReserveDTO } from '../DTO';
 import { IReserve, default as reservesSchema } from '../models/Reserves';
 import mongoose, { Model } from 'mongoose';
 
@@ -31,11 +31,16 @@ export default class ReserveRepository {
 
     //---------- UPDATE RESERVE BY ID ----------
 
-    async update(id: string, data: CreateReserveDTO): Promise<IReserve | null> {
-        return this.ReserveModel.findByIdAndUpdate(id, data, {
-            new: true,
-            runValidators: true,
-        });
+    async update(
+        id_reserve: string,
+        updatedReserveDTO: UpdateReserveDTO
+    ): Promise<IReserve | null> {
+        const updatedReserve = await this.ReserveModel.findByIdAndUpdate(
+            id_reserve,
+            updatedReserveDTO,
+            { new: true }
+        );
+        return updatedReserve;
     }
 
     //---------- GET RESERVE BY ID ----------
@@ -53,7 +58,7 @@ export default class ReserveRepository {
             end_date: { $gte: startDate },
         });
         if (reservations.length > 0) {
-            return true;
+            return reservations;
         }
     }
 
@@ -66,7 +71,7 @@ export default class ReserveRepository {
             end_date: { $gte: startDate },
         });
         if (reservations.length > 0) {
-            return true;
+            return reservations;
         }
     }
 }
