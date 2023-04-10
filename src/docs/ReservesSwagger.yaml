@@ -1,0 +1,291 @@
+tags:
+    name: Reserves
+    description: All operations with reserves.
+    components:
+        securitySchemes:
+            bearerAuth:
+                type: http
+                scheme: bearer
+                bearerFormat: JWT
+
+security:
+    - bearerAuth: []
+
+/reserve:
+    post:
+        summary: Create a new reservation
+        tags:
+            - Reserves
+        security:
+            - bearerAuth: []
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/definitions/CreateReserveDTO'
+        responses:
+            '201':
+                description: Created
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                data:
+                                    $ref: '#/definitions/Reserve'
+            '400':
+                description: Bad Request
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                message:
+                                    type: string
+            '404':
+                description: Not Found
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                message:
+                                    type: string
+
+    get:
+        summary: List all reserves
+        tags:
+            - Reserves
+        parameters:
+            - in: query
+              name: id_user
+              description: User id
+              required: false
+              schema:
+                  type: string
+            - in: query
+              name: start_date
+              description: Start date
+              required: false
+              schema:
+                  type: string
+            - in: query
+              name: end_date
+              description: End date
+              required: false
+              schema:
+                  type: string
+            - in: query
+              name: id_car
+              description: Car id
+              required: false
+              schema:
+                  type: string
+            - in: query
+              name: final_value
+              description: Final value
+              required: false
+              schema:
+                  type: number
+        security:
+            - bearerAuth: []
+        description: Retrieve a list of all reserves, with optional query parameters for filtering
+        responses:
+            '200':
+                description: List of reserves
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                data:
+                                    type: array
+                                    items:
+                                        $ref: '#/definitions/Reserve'
+            '400':
+                description: Invalid request parameters or error
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                message:
+                                    type: string
+
+/reserve/{id}:
+    delete:
+        summary: Delete reserve by id
+        tags:
+            - Reserves
+        security:
+            - bearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              required: true
+              description: Reserve id to be deleted
+              schema:
+                  type: string
+        responses:
+            '204':
+                description: Reserve deleted successfully
+            '400':
+                description: Invalid id
+            '404':
+                description: Reserve not found
+
+    patch:
+        summary: Update a reservation by Id
+        tags:
+            - Reserves
+        security:
+            - bearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              description: Id of the reservation to be updated
+              required: true
+              schema:
+                  type: string
+            - in: header
+              name: Authorization
+              description: Bearer token to authenticate API request
+              required: true
+              schema:
+                  type: string
+        requestBody:
+            description: Updated reservation object
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/definitions/Reserve'
+        responses:
+            '200':
+                description: Successfully updated the reservation
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/Reserve'
+            '400':
+                description: Invalid id format or invalid request body
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                message:
+                                    type: string
+            '404':
+                description: Reservation or associated car not found
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                message:
+                                    type: string
+
+    get:
+        tags:
+            - Reserves
+        security:
+            - bearerAuth: []
+        summary: Get a reserve by id
+        parameters:
+            - name: id
+              in: path
+              required: true
+              type: string
+              description: The id of the reserve to retrieve.
+        responses:
+            '200':
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/Reserve'
+            '400':
+                description: Bad Request
+                schema:
+                    type: object
+                    properties:
+                        message:
+                            type: string
+                            description: Error.
+            404:
+                description: Not Found
+                schema:
+                    type: object
+                    properties:
+                        message:
+                            type: string
+                            description: Not found.
+
+definitions:
+    CreateReserveDTO:
+        type: object
+        required:
+            - id_user
+            - start_date
+            - end_date
+            - id_car
+        properties:
+            id_user:
+                type: string
+                description: User responsible for the reserve
+            start_date:
+                type: date
+                description: Start date for the car's reservation
+            end_date:
+                type: string
+                format: date-time
+                description: End date for the car's reservation
+            id_car:
+                type: string
+                description: Car id
+        example:
+            id_user: 37f8saf9g67s34
+            start_date: 10/10/2020
+            end_date: 10/20/2020
+            id_car: 'dsa98g623jf9'
+
+    Reserve:
+        type: object
+        properties:
+            _id:
+                type: string
+                description: Id of the reservation
+            id_user:
+                type: string
+                description: User's id
+            start_date:
+                type: date
+                description: Start date for the car's reservation
+            end_date:
+                type: date
+                description: End date for the car's reservation
+            id_car:
+                type: string
+                description: Car id
+            final_value:
+                type: number
+                description: Final value reserve
+
+    ErrorMessage:
+        type: object
+        properties:
+            message:
+                type: string
+                example: 'Error message'
+        required:
+            - message
+
+    NotFound:
+        type: object
+        properties:
+            message:
+                type: string
+                example: 'Not found'
+        required:
+            - message

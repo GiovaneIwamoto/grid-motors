@@ -1,0 +1,306 @@
+tags:
+    name: Users
+    description: All operations with users.
+    components:
+        securitySchemes:
+            bearerAuth:
+                type: http
+                scheme: bearer
+                bearerFormat: JWT
+
+security:
+    - bearerAuth: []
+
+/user:
+    post:
+        summary: Create User
+        tags:
+            - Users
+        consumes:
+            - application/json
+        produces:
+            - application/json
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/definitions/CreateUsersDTO'
+
+        responses:
+            201:
+                description: User created successfully
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/CreatedUserResponse'
+            400:
+                description: Invalid request
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/ErrorMessage'
+
+    get:
+        summary: Get All Users
+        tags:
+            - Users
+        security:
+            - bearerAuth: []
+        produces:
+            - application/json
+        parameters:
+            - in: header
+              name: Authorization
+              type: string
+              required: true
+              description: Token JWT
+        responses:
+            '200':
+                description: List of users
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                data:
+                                    type: array
+                                    items:
+                                        $ref: '#/definitions/CreatedUserResponse'
+            '400':
+                description: Error
+                schema:
+                    $ref: '#/definitions/ErrorMessage'
+
+/user/{id}:
+    delete:
+        tags:
+            - Users
+        summary: Delete User by id
+        description: Deletes a user with the specified id
+        parameters:
+            - name: id
+              in: path
+              description: Id of the user to delete
+              required: true
+              type: string
+        security:
+            - bearerAuth: []
+        responses:
+            '204':
+                description: User deleted successfully
+            '400':
+                description: Invalid id format
+                schema:
+                    $ref: '#/definitions/ErrorMessage'
+            '404':
+                description: User with specified id not found
+                schema:
+                    $ref: '#/definitions/NotFound'
+    put:
+        tags:
+            - Users
+        summary: Update User by id
+        description: Updates an existing user with the given id.
+        security:
+            - bearerAuth: []
+        parameters:
+            - name: id
+              in: path
+              description: Id of the user to update.
+              required: true
+              type: string
+            - name: body
+              in: body
+              description: User object that needs to be updated.
+              required: true
+              schema:
+                  $ref: '#/definitions/CreateUsersDTO'
+        responses:
+            '200':
+                description: User updated successfully
+                schema:
+                    $ref: '#/definitions/CreatedUserResponse'
+            '400':
+                description: Invalid params format
+                schema:
+                    $ref: '#/definitions/ErrorMessage'
+            '404':
+                description: User with id not found
+                schema:
+                    $ref: '#/definitions/NotFound'
+
+    get:
+        tags:
+            - Users
+        summary: Get a user by id
+        parameters:
+            - in: path
+              name: id
+              required: true
+              description: Id of the user to retrieve
+              schema:
+                  type: string
+        security:
+            - bearerAuth: []
+        responses:
+            '200':
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/CreatedUserResponse'
+            '400':
+                description: Id format invalids
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/ErrorMessage'
+            '404':
+                description: User with id not found
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/NotFound'
+/authenticate:
+    post:
+        tags:
+            - Authentication
+        summary: Authenticate a user
+        parameters:
+            - name: body
+              in: body
+              required: true
+              schema:
+                  $ref: '#/definitions/AuthenticateDTO'
+              description: The email and password of the user to authenticate.
+        responses:
+            200:
+                description: OK
+                schema:
+                    type: object
+                    properties:
+                        message:
+                            type: string
+                            description: Success.
+                        token:
+                            type: string
+                            description: JWT token generated for the user.
+            400:
+                description: Bad Request
+                schema:
+                    type: object
+                    properties:
+                        message:
+                            type: string
+                            description: Authenticate error.
+
+definitions:
+    CreateUsersDTO:
+        type: object
+        required:
+            - name
+            - cpf
+            - birth
+            - email
+            - password
+            - cep
+            - qualified
+        properties:
+            name:
+                type: string
+            cpf:
+                type: string
+            birth:
+                type: string
+            email:
+                type: string
+            password:
+                type: string
+            cep:
+                type: string
+            qualified:
+                type: string
+                enum: ['yes', 'no']
+
+    CreatedUserResponse:
+        type: object
+        properties:
+            name:
+                type: string
+            cpf:
+                type: string
+            birth:
+                type: string
+            email:
+                type: string
+            password:
+                type: string
+            cep:
+                type: string
+            qualified:
+                type: string
+                enum: ['yes', 'no']
+            patio:
+                type: string
+            complement:
+                type: string
+            neighborhood:
+                type: string
+            locality:
+                type: string
+            uf:
+                type: string
+
+    ErrorMessage:
+        type: object
+        properties:
+            message:
+                type: string
+                example: 'Error message'
+        required:
+            - message
+
+    NotFound:
+        type: object
+        properties:
+            message:
+                type: string
+                example: 'Not found'
+        required:
+            - message
+
+    AllUsersResponse:
+    type: object
+    properties:
+        data:
+            type: array
+            items:
+                $ref: '#/definitions/CreatedUserResponse'
+
+    CreateUserDTO:
+        type: object
+        properties:
+            name:
+                type: string
+            cpf:
+                type: string
+            birth:
+                type: string
+            email:
+                type: string
+            password:
+                type: string
+            cep:
+                type: string
+            qualified:
+                type: string
+                enum:
+                    - 'yes'
+                    - 'no'
+    AuthenticateDTO:
+        type: object
+        properties:
+            email:
+                type: string
+            password:
+                type: string

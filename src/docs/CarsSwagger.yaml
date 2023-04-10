@@ -1,0 +1,279 @@
+tags:
+    name: Cars
+    description: All operations with cars.
+    components:
+        securitySchemes:
+            bearerAuth:
+                type: http
+                scheme: bearer
+                bearerFormat: JWT
+
+security:
+    - bearerAuth: []
+
+/car:
+    post:
+        summary: Register new car
+        tags:
+            - Cars
+        security:
+            - bearerAuth: []
+        requestBody:
+            description: JSON car that will be created
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/definitions/CreateCarsDTO'
+        responses:
+            '201':
+                description: Car created successfully
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/CreateCarsDTO'
+            '400':
+                description: Error creating car
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/ErrorMessage'
+
+    get:
+        summary: Get all cars
+        tags:
+            - Cars
+        parameters:
+            - in: query
+              name: model
+              description: Car model
+              required: false
+              schema:
+                  type: string
+            - in: query
+              name: color
+              description: Car color
+              required: false
+              schema:
+                  type: string
+            - in: query
+              name: year
+              description: Car year
+              required: false
+              schema:
+                  type: string
+            - in: query
+              name: value_per_day
+              description: Car value per day
+              required: false
+              schema:
+                  type: number
+        responses:
+            '200':
+                description: All cars listing
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                data:
+                                    type: array
+                                    items:
+                                        $ref: '#/definitions/CreateCarsDTO'
+            '400':
+                description: Error returning all cars
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/ErrorMessage'
+
+/car/{id}:
+    delete:
+        summary: Delete car by id
+        tags:
+            - Cars
+        security:
+            - bearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              description: Valid car id to be excluded
+              required: true
+              schema:
+                  type: string
+        responses:
+            '204':
+                description: Success deleting car
+            '400':
+                description: Id format Invalid
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/ErrorMessage'
+            '404':
+                description: Car not found
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/NotFound'
+
+    put:
+        summary: Update car by id
+        tags:
+            - Cars
+        security:
+            - bearerAuth: []
+        parameters:
+            - in: path
+              name: id
+              description: Car id
+              required: true
+              schema:
+                  type: string
+            - in: body
+              name: body
+              description: New car data
+              required: true
+              schema:
+                  $ref: '#/definitions/CreateCarsDTO'
+        responses:
+            '200':
+                description: Car updated successfully
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/CreateCarsDTO'
+            '400':
+                description: Id or params format invalids
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/ErrorMessage'
+            '404':
+                description: Car with id not found
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/NotFound'
+
+    get:
+        summary: Get a car by Id
+        tags:
+            - Cars
+        parameters:
+            - in: path
+              name: id
+              required: true
+              description: Id of the car to retrieve
+              schema:
+                  type: string
+        security:
+            - bearerAuth: []
+        responses:
+            '200':
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/CreateCarsDTO'
+            '400':
+                description: Id format invalids
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/ErrorMessage'
+            '404':
+                description: Car with id not found
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/NotFound'
+
+/car/{carId}/accessories/{accessoryId}:
+    patch:
+        summary: Patch a car's accessory
+        tags:
+            - Accessories
+        security:
+            - bearerAuth: []
+        parameters:
+            - name: carId
+              in: path
+              required: true
+              description: Car id to be updated
+              schema:
+                  type: string
+            - name: accessoryId
+              in: path
+              required: true
+              description: Accessory id to be updated
+              schema:
+                  type: string
+            - name: body
+              in: body
+              required: true
+              description: Accessory description to be updated
+              schema:
+                  type: object
+                  properties:
+                      description:
+                          type: string
+                          description: Acessory description
+        responses:
+            '200':
+                description: Accessory updated
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/definitions/CreateCarsDTO'
+            '400':
+                description: Invalid params
+                schema:
+                    type: object
+                    properties:
+                        message:
+                            type: string
+                            description: Error message
+            '404':
+                description: Accessory or car not found
+                schema:
+                    type: object
+                    properties:
+                        message:
+                            type: string
+                            description: Error message
+
+definitions:
+    CreateCarsDTO:
+        type: object
+        properties:
+            model:
+                type: string
+            color:
+                type: string
+            year:
+                type: string
+            value_per_day:
+                type: number
+            accessories:
+                type: string
+            number_of_passengers:
+                type: number
+
+    ErrorMessage:
+        type: object
+        properties:
+            message:
+                type: string
+                example: 'Error message'
+        required:
+            - message
+
+    NotFound:
+        type: object
+        properties:
+            message:
+                type: string
+                example: 'Not found'
+        required:
+            - message
