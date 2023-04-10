@@ -49,7 +49,7 @@ mongoose
         useUnifiedTopology: false,
     })
     .then((con: Connection) => {
-        console.log('DB CONNECTION SUCCESSFUL! ⚙️');
+        // console.log('DB CONNECTION SUCCESSFUL! ⚙️');
     });
 
 //---------------- ROUTES ----------------
@@ -59,4 +59,6 @@ app.use(baseRoute, UsersRoute);
 app.use(baseRoute, ReservesRoute);
 
 //------------------ SERVER ----------------
-app.listen(3000, () => console.log('SERVER RUNNING ON PORT 3000 ⚙️'));
+// app.listen(3000, () => console.log('SERVER RUNNING ON PORT 3000 ⚙️'));
+app.listen(3000);
+export { app };
