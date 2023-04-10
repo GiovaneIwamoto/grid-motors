@@ -5,8 +5,8 @@ const config: Config.InitialOptions = {
     testEnvironment: 'node',
     verbose: true,
     collectCoverage: true,
-    collectCoverageFrom: ['<rootDir>/src/routes/*.ts'],
-    // collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+    // collectCoverageFrom: ['<rootDir>/src/routes/*.ts'],
+    collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
 };
 
 export default config;
