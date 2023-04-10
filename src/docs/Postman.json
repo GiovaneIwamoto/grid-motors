@@ -1,0 +1,423 @@
+{
+	"info": {
+		"_postman_id": "7ce79c37-8ce5-4e4f-9e6d-e5540d678296",
+		"name": "Grid Motors",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "25706688"
+	},
+	"item": [
+		{
+			"name": "CAR",
+			"item": [
+				{
+					"name": "ACCESSORY - PATCH",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzIxMGUyZGQ0OTg5NGY3OGZlZWQ1ZiIsImVtYWlsIjoiZ2lvdmFuZUBhZG1pbi5jb20iLCJpYXQiOjE2ODEwODYwNzMsImV4cCI6MTY4MTEyOTI3M30.93N_SSIaabGgvt-8fJZy_bc1DoI3NoGPMaRZqR7bh7w"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Hydraulic steering\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/v1/car/642cf890dc17594bac031307/accessories/642cf890dc17594bac031309"
+					},
+					"response": []
+				},
+				{
+					"name": "CAR - POST",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzQ0ZjY0ZThmZTFjMzkyMDgzMTBiNyIsImVtYWlsIjoiYWRtaW4wMUBhZG1pbi5jb20iLCJpYXQiOjE2ODExNDk4MDQsImV4cCI6MTY4MTE5MzAwNH0.zYS_ZxxuHmgtFt8diICBpfyOv0ZD1HQlfQ9_6ihRRDQ"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"carModel\": \"Mercedes\" ,\r\n    \"color\":\"White\",\r\n    \"year\": \"2021\",\r\n    \"value_per_day\": 5000,\r\n    \"accessories\": [\r\n        {\r\n            \"description\": \"Nitro\"\r\n        },\r\n        {\r\n            \"description\": \"Sunroof\"\r\n        }\r\n\r\n    ],\r\n\r\n    \"number_of_passengers\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/v1/car"
+					},
+					"response": []
+				},
+				{
+					"name": "CAR - DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/api/v1/car/642ca42ae8981410fcf0b72d"
+					},
+					"response": []
+				},
+				{
+					"name": "CAR - PUT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzA5NDE2Y2UzMzdkNGFiYzJkN2UyNSIsImVtYWlsIjoiZ2lvdmFuZWl3YW1vdG9AZ21haWwuY29tIiwiaWF0IjoxNjgwOTI4NzQwLCJleHAiOjE2ODA5NzE5NDB9.w1YE8plJiiRe1cro9RurdOduOEzo6nZ1bHPmXwd95A8"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"carModel\": \"Mercedes\",\r\n    \"color\": \"Black\",\r\n    \"year\": 2021,\r\n    \"value_per_day\": 7000,\r\n    \"accessories\": [\r\n        {\r\n            \"_id\": \"64344f82e8fe1c39208310bb\",\r\n            \"description\": \"Nitro\"\r\n        },\r\n        {\r\n            \"_id\": \"64344f82e8fe1c39208310bc\",\r\n            \"description\": \"Sunroof\"\r\n        }\r\n    ],\r\n    \"number_of_passengers\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/v1/car/64309497ce337d4abc2d7e2c"
+					},
+					"response": []
+				},
+				{
+					"name": "CAR - GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/car",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"car"
+							],
+							"query": [
+								{
+									"key": "carModel",
+									"value": "Mercedes",
+									"disabled": true
+								},
+								{
+									"key": "year",
+									"value": "1959",
+									"disabled": true
+								},
+								{
+									"key": "color",
+									"value": "White",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CAR - GET BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/v1/car/64344f82e8fe1c39208310ba"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "USER  - POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Admin01\",\r\n    \"cpf\": \"26796311027\",\r\n    \"birth\": \"10/12/1996\",\r\n    \"email\": \"admin01@admin.com\",\r\n    \"password\": \"123456\",\r\n    \"cep\": \"01517020\",\r\n    \"qualified\": \"yes\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/v1/user"
+					},
+					"response": []
+				},
+				{
+					"name": "USER - DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/api/v1/user/642e61ca11f558411046081"
+					},
+					"response": []
+				},
+				{
+					"name": "USER - PUT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzQ0ZjY0ZThmZTFjMzkyMDgzMTBiNyIsImVtYWlsIjoiYWRtaW4wMUBhZG1pbi5jb20iLCJpYXQiOjE2ODExNTAxODIsImV4cCI6MTY4MTE5MzM4Mn0.v5wwJ12P0kcsrbh7hasqt1m_1X9EpRmD6AfMnbR4eSA"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "        {\r\n            \"_id\": \"64344f64e8fe1c39208310b7\",\r\n            \"name\": \"Admin01\",\r\n            \"cpf\": \"26796311027\",\r\n            \"birth\": \"11/07/2000\",\r\n            \"email\": \"admin01@admin.com\",\r\n            \"password\": \"123456\",\r\n            \"cep\": \"51020900\",\r\n            \"qualified\": \"yes\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/v1/user/64344f64e8fe1c39208310b7"
+					},
+					"response": []
+				},
+				{
+					"name": "USER - GET ALL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzQ0ZjY0ZThmZTFjMzkyMDgzMTBiNyIsImVtYWlsIjoiYWRtaW4wMUBhZG1pbi5jb20iLCJpYXQiOjE2ODExNDk4MDQsImV4cCI6MTY4MTE5MzAwNH0.zYS_ZxxuHmgtFt8diICBpfyOv0ZD1HQlfQ9_6ihRRDQ"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							],
+							"query": [
+								{
+									"key": "qualified",
+									"value": "yes",
+									"disabled": true
+								},
+								{
+									"key": "neighborhood",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER - GET BY ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzQ0ZjY0ZThmZTFjMzkyMDgzMTBiNyIsImVtYWlsIjoiYWRtaW4wMUBhZG1pbi5jb20iLCJpYXQiOjE2ODExNTAxODIsImV4cCI6MTY4MTE5MzM4Mn0.v5wwJ12P0kcsrbh7hasqt1m_1X9EpRmD6AfMnbR4eSA"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/v1/user/642f2484b13a71211c36c6e5"
+					},
+					"response": []
+				},
+				{
+					"name": "USER - AUTHENTICATE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin01@admin.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/v1/authenticate"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RESERVE",
+			"item": [
+				{
+					"name": "RESERVE - POST",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzQ0ZjY0ZThmZTFjMzkyMDgzMTBiNyIsImVtYWlsIjoiYWRtaW4wMUBhZG1pbi5jb20iLCJpYXQiOjE2ODExNTAxODIsImV4cCI6MTY4MTE5MzM4Mn0.v5wwJ12P0kcsrbh7hasqt1m_1X9EpRmD6AfMnbR4eSA"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"start_date\": \"10/21/2022\",\r\n    \"end_date\": \"10/30/2022\",\r\n    \"id_car\": \"64344f82e8fe1c39208310ba\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/v1/reserve"
+					},
+					"response": []
+				},
+				{
+					"name": "RESERVE - DELETE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzIxMGUyZGQ0OTg5NGY3OGZlZWQ1ZiIsImVtYWlsIjoiZ2lvdmFuZUBhZG1pbi5jb20iLCJpYXQiOjE2ODEwMjUwNTAsImV4cCI6MTY4MTA2ODI1MH0.TwMQScfd8kamjnKd2RT2_89Xg5y_m_u7sFEc59XoEkI"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/api/v1/reserve/64322a954a0f16612816f0aa"
+					},
+					"response": []
+				},
+				{
+					"name": "RESERVE - PUT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzIxMGUyZGQ0OTg5NGY3OGZlZWQ1ZiIsImVtYWlsIjoiZ2lvdmFuZUBhZG1pbi5jb20iLCJpYXQiOjE2ODEwMDM5MTcsImV4cCI6MTY4MTA0NzExN30.d3jwqF-w3j5XGdsdlpsZr1HX-SH_PTbr558DM-mlwgY"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "        {\r\n            \"_id\": \"64345207e8fe1c39208310cb\",\r\n            \"id_user\": \"64344f64e8fe1c39208310b7\",\r\n            \"start_date\": \"2022-02-05T04:00:00.000Z\",\r\n            \"end_date\": \"2022-02-15T04:00:00.000Z\",\r\n            \"id_car\": \"64344f82e8fe1c39208310ba\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/v1/reserve/64345207e8fe1c39208310cb"
+					},
+					"response": []
+				},
+				{
+					"name": "RESERVE - GET ALL",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzIwYWFmMjc3ODNhM2NmMDI2M2YyYyIsImVtYWlsIjoiYWRtaW4yQGFkbWluLmNvbSIsImlhdCI6MTY4MTAwMTE0MSwiZXhwIjoxNjgxMDQ0MzQxfQ.4QtSINou2QBkux-oNr2-E4Uhks7mCcMMwn-SOQePMq4"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/reserve",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"reserve"
+							],
+							"query": [
+								{
+									"key": "final_value",
+									"value": "200",
+									"disabled": true
+								},
+								{
+									"key": "start_date",
+									"value": "10/10/2022",
+									"disabled": true
+								},
+								{
+									"key": "end_date",
+									"value": "10/20/2022",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RESERVE - GET BY ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzIxMGUyZGQ0OTg5NGY3OGZlZWQ1ZiIsImVtYWlsIjoiZ2lvdmFuZUBhZG1pbi5jb20iLCJpYXQiOjE2ODEwMDM5MTcsImV4cCI6MTY4MTA0NzExN30.d3jwqF-w3j5XGdsdlpsZr1HX-SH_PTbr558DM-mlwgY"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/v1/reserve/643215f2c1747d48bcfa08d"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
