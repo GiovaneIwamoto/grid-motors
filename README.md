@@ -1,4 +1,4 @@
-# Grid Motors
+# GRID MOTORS
 
 #### **INTRODUCTION**
 
@@ -6,7 +6,7 @@ Welcome to Grid Motors API that allows admins to perform various operations rela
 
 #### **INSTALLATION GUIDE**
 
--   Clone this repository [planner-api](https://github.com/GiovaneIwamoto/grid-motors.git)
+-   Clone this repository [grid-motors](https://github.com/GiovaneIwamoto/grid-motors.git)
 
 -   Ensure that you are working from the main branch, it is the most stable at any given time for this project.
 
@@ -32,7 +32,13 @@ Welcome to Grid Motors API that allows admins to perform various operations rela
 
 -   `USER REGISTER` At user post method there are some importants validations to be considered. CPF at the request body is validated by a third-party library called cpf-cnpj-validator that checks if the string passed is valid according to the cpf validation logic and internally the API checks at the database if it is unique. CEP attribute is sended to an external API called VIA CEP that returns some infos about the location. User's age is calculated internally and validates if user is at least eighteen years old. Email must be unique in base and must have a valid format. Password length is validated by mongo and must be at least six digits.
 
+-   `USER UPDATE` Admins can update existing users at the database by making a put request. All the restrictions from user registering are applied for this method. All extra CEP infos are handled from VIA CEP and automatically updated to base without the need to manually add.
+
+-   `USER DELETE` It is also possible to delete an existing user passing its ID. Only authenticated users are able to use this method.
+
 -   `USER AUTHENTICATION` Users can get a valid token making a post request with a valid email and password. The system checks its credentials and return a temporary token that expires in twelve hours
+
+-   `ACCESSORY PATCH` Authenticated users can edit accessorie's description making a patch request containing both car and accessory ID that want to update.
 
 #### **SWAGGER**
 
