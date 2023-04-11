@@ -4,7 +4,7 @@ import { UpdateReserveDTO } from '../DTO';
 import { ReservesService } from '../services';
 
 export default class ReservesController {
-    private reservesService: ReservesService;
+    public reservesService: ReservesService;
 
     constructor() {
         this.reservesService = new ReservesService();

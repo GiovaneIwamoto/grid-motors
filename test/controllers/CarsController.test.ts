@@ -51,7 +51,7 @@ describe('CreateCar', () => {
         } as unknown as jest.Mocked<CarsService>;
 
         carsController = new CarsController();
-        carsController.carsService = carsService;
+        carsController['carsService'] = carsService;
     });
 
     it('should return 201 with the created car', async () => {
