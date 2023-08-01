@@ -1,10 +1,10 @@
 # GRID MOTORS
 
-#### **INTRODUCTION**
+### **INTRODUCTION**
 
 Welcome to Grid Motors API that allows admins to perform various operations related to Cars, Users and Events management. The API includes CRUD routes for all of those classes previously quote. Please refer to the following routes for more details:
 
-#### **INSTALLATION GUIDE**
+### **INSTALLATION GUIDE**
 
 -   Clone this repository [grid-motors](https://github.com/GiovaneIwamoto/grid-motors.git)
 
@@ -20,7 +20,7 @@ Welcome to Grid Motors API that allows admins to perform various operations rela
 
 -   Make sure that you have all that dependencies in your package.json file correctly installed
 
-#### **FEATURES**
+### **FEATURES**
 
 -   `CAR REGISTER` Allows authenticated users to register a car being necessary to have at least one accessory. The car fabrication year must be between 1950 and 2023. It is not able to register duplicates accessories at the same object.
 
@@ -52,11 +52,11 @@ Welcome to Grid Motors API that allows admins to perform various operations rela
 
 -   `RESERVE DELETE` Authenticated users can remove a reserve using a valid and existing ID.
 
-#### **SWAGGER**
+### **SWAGGER**
 
 Swagger was implemented to provide a more user-friendly interface for testing this API. You can access the Swagger UI by visiting `http://localhost:3000/api/v1/api-docs` in your browser. From there, you can see a list of all available API routes and see all request and response bodies examples. At this point, some interactions with swagger isn't already working as it should be, as a developer, I highly recommend testing and visualize the endpoints using the Postman Collection available at SRC folder if it is in your interest consuming the API features.
 
-#### **TECHNOLOGIES USED**
+### **TECHNOLOGIES USED**
 
 The following technologies were used in the development of this project:
 
@@ -80,7 +80,7 @@ The following technologies were used in the development of this project:
 
 All functionalities of the routes and the authentication system are documented in Swagger, which can be accessed at the specif route defined above after starting the local server with npm run start. The project also includes development dependencies such as `nodemon` for automatic server restarts and `ts-node` for running TypeScript files without compilation.
 
-#### **UNIMPLEMENTED FEATURES**
+### **UNIMPLEMENTED FEATURES**
 
 One potential technology that was not applied in this project is pagination for the GET ALL methods. Pagination is a technique used to limit the amount of data returned from a query or API endpoint, typically for retrieving large datasets, and it can greatly improve the performance and efficiency of data retrieval operations.
 
@@ -88,16 +88,16 @@ By implementing pagination, the application could have provided a more scalable 
 
 While pagination is not implemented in the current project, it could have been a valuable addition to optimize the performance and user experience of the application, especially when dealing with large datasets.
 
-#### **FEATURES TO BE ENHANCED**
+### **FEATURES TO BE ENHANCED**
 
 I conducted some unit testing using Jest for certain controllers and other folders in my architecture. However, the test coverage achieved was only 40%, which is not very satisfactory. It is evident that there is ample room for improvement in terms of test coverage. Increasing the test coverage can greatly enhance the overall quality and reliability of the codebase, as it helps to identify and fix potential issues and regressions.
 
-#### **CONCLUSION**
+### **CONCLUSION**
 
 Thank you for testing my app.
 This project provides a simple and straightforward way for managing reserves, cars and users accounts. Whether you're creating a new reserve or deleting your account, the project has got you covered.
 
-#### **AUTHORS**
+### **AUTHORS**
 
 -   Giovane Hashinokuti Iwamoto - Computer Science student at UFMS - Brazil - MS
 
