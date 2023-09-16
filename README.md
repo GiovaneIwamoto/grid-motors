@@ -94,7 +94,6 @@ I conducted some unit testing using Jest for certain controllers and other folde
 
 ### **CONCLUSION**
 
-Thank you for testing my app.
 This project provides a simple and straightforward way for managing reserves, cars and users accounts. Whether you're creating a new reserve or deleting your account, the project has got you covered.
 
 ### **AUTHORS**
