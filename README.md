@@ -6,12 +6,12 @@ Welcome to Grid Motors API, which empowers administrators to perform a variety o
 
 [![Icons](https://skillicons.dev/icons?i=ts,nodejs,mongodb,fastapi,jest,postman&theme=dark)](https://skillicons.dev)
 
+> [!IMPORTANT]
+> All functionalities of the routes and the authentication system are documented in Swagger, which can be accessed at the specif route defined bellow after starting the local server with npm run start. The project also includes development dependencies such as nodemon for automatic server restarts.
+
 ---
 
 ### **FEATURES**
-
-> [!IMPORTANT]
-> All functionalities of the routes and the authentication system are documented in Swagger, which can be accessed at the specif route defined bellow after starting the local server with npm run start. The project also includes development dependencies such as nodemon for automatic server restarts.
 
 > CARS OPERATIONS
 
@@ -67,7 +67,7 @@ Welcome to Grid Motors API, which empowers administrators to perform a variety o
 
 ```python
 Run "npm install" to install all the dependencies needs.
-Run "npm run start" to start the local server hosted at "http://localhost:3000" and the connection to the data base.
+Run "npm run start" to start the local server hosted at "http://localhost:3000".
 Run "npm run test" to check tests coverages implemented using Jest.
 ```
 
@@ -81,15 +81,15 @@ Run "npm run test" to check tests coverages implemented using Jest.
 ```ruby
 The following technologies were used in the development of this project:
 
-Nodejs: A JavaScript runtime built on Chromes V8 JavaScript engine that allows for server-side scripting.
+Nodejs: A JavaScript runtime built on Chromes V8 JS engine that allows for serverside scripting.
 Express: A fast and minimalist web framework for Node.js used to create server applications.
-Mongoose: An Object Data Modeling library used for MongoDB to provide a schema-based solution to model application data.
+Mongoose: An ODM library used for MongoDB to provide a schema-based solution to model app data.
 MongoDB: A document-oriented NoSQL database used for storing and retrieving data.
-JSONWebTokens: A compact and selfcontained way for securely transmitting information between parties as a JSON object.
-Swagger: An open-source software framework used for designing, building, documenting, and consuming RESTful web services.
-Dotenv: A zero-dependency module used for loading environment variables from a .env file into process.env.
-TypeScript: A statically-typed superset of JavaScript that compiles to plain JavaScript.
-Jest: A popular JavaScript testing framework used for writing unit tests, integration tests, and endtoend tests.
+JSONWebTokens: A compact and selfcontained way for securely transmitting information as JSON obj.
+Swagger: Framework used for designing, building, documenting, and consuming RESTful web services.
+Dotenv: Module used for loading environment variables from a env file into process env.
+TypeScript: A statically typed superset of JavaScript that compiles to plain JavaScript.
+Jest: A popular JavaScript testing framework used for writing unit tests.
 ```
 
 ---
@@ -99,8 +99,6 @@ Jest: A popular JavaScript testing framework used for writing unit tests, integr
 One potential technology that was not applied in this project is pagination for the GET ALL methods. Pagination is a technique used to limit the amount of data returned from a query or API endpoint, typically for retrieving large datasets, and it can greatly improve the performance and efficiency of data retrieval operations.
 
 By implementing pagination, the application could have provided a more scalable and optimized solution for fetching data, particularly in scenarios where there are a large number of records to be returned. Pagination allows for retrieving data in smaller, more manageable chunks, reducing the load on the server and improving response times. This can be particularly beneficial in cases where bandwidth or processing resources are limited, or when dealing with slow or unreliable network connections.
-
-While pagination is not implemented in the current project, it could have been a valuable addition to optimize the performance and user experience of the application, especially when dealing with large datasets.
 
 > [!WARNING]
 > Jest unit testing coverage achieved only 40%, which is not very satisfactory. It is evident that there is ample room for improvement in terms of test coverage. Increasing the test coverage can greatly enhance the overall quality and reliability of the codebase, as it helps to identify and fix potential issues and regressions.
