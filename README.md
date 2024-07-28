@@ -2,7 +2,7 @@
 
 ### **INTRODUCTION**
 
-Welcome to Grid Motors API that allows admins to perform various operations related to Cars, Users and Events management. The API includes CRUD routes for all of those classes previously quote. Please refer to the following routes for more details:
+Welcome to Grid Motors API that allows admins to perform various operations related to Cars, Users and Events management. The API includes CRUD routes for all of those classes previously quote.
 
 [![Icons](https://skillicons.dev/icons?i=ts,nodejs,mongodb,fastapi,jest,postman&theme=dark)](https://skillicons.dev)
 
@@ -11,7 +11,9 @@ Welcome to Grid Motors API that allows admins to perform various operations rela
 ### **FEATURES**
 
 > [!IMPORTANT]
-> All functionalities of the routes and the authentication system are documented in Swagger, which can be accessed at the specif route defined bellow after starting the local server with npm run start. The project also includes development dependencies such as nodemon for automatic server restarts and ts-node for running TypeScript files without compilation.
+> All functionalities of the routes and the authentication system are documented in Swagger, which can be accessed at the specif route defined bellow after starting the local server with npm run start. The project also includes development dependencies such as nodemon for automatic server restarts.
+
+> CARS OPERATIONS
 
 `CAR REGISTER` Allows authenticated users to register a car being necessary to have at least one accessory. The car fabrication year must be between 1950 and 2023. It is not able to register duplicates accessories at the same object.
 
@@ -24,6 +26,8 @@ Welcome to Grid Motors API that allows admins to perform various operations rela
 `CAR GET BY ID` Using this method is able to get one single car, if exists, by passing its id.
 
 ---
+
+> USERS OPERATIONS
 
 `USER REGISTER` At user post method there are some importants validations to be considered. CPF at the request body is validated by a third-party library called cpf-cnpj-validator that checks if the string passed is valid according to the cpf validation logic and internally the API checks at the database if it is unique. CEP attribute is sended to an external API called VIA CEP that returns some infos about the location. User's age is calculated internally and validates if user is at least eighteen years old. Email must be unique in base and must have a valid format. Password length is validated by mongo and must be at least six digits.
 
@@ -39,6 +43,8 @@ Welcome to Grid Motors API that allows admins to perform various operations rela
 
 ---
 
+> RESERVATIONS OPERATIONS
+
 `RESERVE REGISTER` Only authenticated users that have a driver's license are able to make a car reservation. The resquest body needs to contain a start and end date that is necessary for the calculation of the final value for reservation. It is also required a car's ID that refers to the rented car for that period of time. Differents car's models have differents prices, with that bussiness logic the API is responsible and able to calculate the final value according to the car model. Another interesting feature is that after conclude a reservation, the responsible user can no longer rent another car according to the registered booking date in his domain. The same rule applies when others users try to register a reservation that already has a car scheduled for a common date previously reserved.
 
 `RESERVE GET ALL AND BY ID` Users that are logged into the system authentication can get a list of all the reservations or a specific reserve by passing a valid reserve's ID. Searching can be filtered passing params at query.
@@ -46,10 +52,6 @@ Welcome to Grid Motors API that allows admins to perform various operations rela
 `RESERVE UPDATE PUT` Some bussiness logic at updating a reserve were implemented at this API. Using a valid and registered reserve's ID it is possible to change some infos. The user ID responsible for the reservation can only be changable if the new user ID has a driver's license. Reservation dates can only be changed if both the car is available and if the user do not have a reserve registered for the mentioned date.
 
 `RESERVE DELETE` Authenticated users can remove a reserve using a valid and existing ID.
-
----
-
-### **SWAGGER**
 
 > [!TIP]
 > Swagger was implemented to provide a more user-friendly interface for testing this API. You can access the Swagger UI by visiting http://localhost:3000/api/v1/api-docs in your browser. From there, you can see a list of all available API routes and see all request and response bodies examples. At this point, some interactions with swagger isn't already working as it should be, as a developer, I highly recommend testing and visualize the endpoints using the Postman Collection available at src folder if it is in your interest consuming the API features.
@@ -100,12 +102,6 @@ While pagination is not implemented in the current project, it could have been a
 
 > [!WARNING]
 > Jest unit testing coverage achieved only 40%, which is not very satisfactory. It is evident that there is ample room for improvement in terms of test coverage. Increasing the test coverage can greatly enhance the overall quality and reliability of the codebase, as it helps to identify and fix potential issues and regressions.
-
----
-
-### **CONCLUSION**
-
-This project provides a simple and straightforward way for managing reserves, cars and users accounts. Whether you're creating a new reserve or deleting your account, the project has got you covered.
 
 ---
 
