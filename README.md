@@ -4,23 +4,14 @@
 
 Welcome to Grid Motors API that allows admins to perform various operations related to Cars, Users and Events management. The API includes CRUD routes for all of those classes previously quote. Please refer to the following routes for more details:
 
-### **INSTALLATION GUIDE**
+[![Icons](https://skillicons.dev/icons?i=ts,nodejs,mongodb,fastapi,jes,postman&theme=dark)](https://skillicons.dev)
 
--   Clone this repository [grid-motors](https://github.com/GiovaneIwamoto/grid-motors.git)
-
--   Ensure that you are working from the main branch, it is the most stable at any given time for this project.
-
--   Run `npm install` to install all the dependencies needs.
-
--   Run `npm run start` to start the local server hosted at http://localhost:3000 and the connection to the data base.
-
--   Run `npm run test` to check tests coverages implemented using Jest.
-
--   To connect the application to the database, create a self `config.env` file at the root of your project, if it does not already exist. In this file, set the values of two environment variables: `DATABASE` and `DATABASE_PASSWORD`. These variables should contain the database connection string and the database password, respectively. Once you have set these variables, the application will be able to access the database using the provided credentials. My own development cluster is available at the config.env file at this project, but it is recommended to create your own data base.
-
--   Make sure that you have all that dependencies in your package.json file correctly installed
+---
 
 ### **FEATURES**
+
+> [!IMPORTANT]
+> All functionalities of the routes and the authentication system are documented in Swagger, which can be accessed at the specif route defined bellow after starting the local server with npm run start. The project also includes development dependencies such as nodemon for automatic server restarts and ts-node for running TypeScript files without compilation.
 
 -   `CAR REGISTER` Allows authenticated users to register a car being necessary to have at least one accessory. The car fabrication year must be between 1950 and 2023. It is not able to register duplicates accessories at the same object.
 
@@ -52,33 +43,50 @@ Welcome to Grid Motors API that allows admins to perform various operations rela
 
 -   `RESERVE DELETE` Authenticated users can remove a reserve using a valid and existing ID.
 
+---
+
 ### **SWAGGER**
 
 Swagger was implemented to provide a more user-friendly interface for testing this API. You can access the Swagger UI by visiting `http://localhost:3000/api/v1/api-docs` in your browser. From there, you can see a list of all available API routes and see all request and response bodies examples. At this point, some interactions with swagger isn't already working as it should be, as a developer, I highly recommend testing and visualize the endpoints using the Postman Collection available at SRC folder if it is in your interest consuming the API features.
 
+---
+
+### **INSTALLATION GUIDE**
+
+> [!CAUTION]
+> Ensure that you are working from the main branch, it is the most stable at any given time for this project.
+
+```python
+Run "npm install" to install all the dependencies needs.
+Run "npm run start" to start the local server hosted at "http://localhost:3000" and the connection to the data base.
+Run "npm run test" to check tests coverages implemented using Jest.
+```
+
+> [!WARNING]
+> To connect the application to the database, create a self `config.env` file at the root of your project, if it does not already exist. In this file, set the values of two environment variables: DATABASE and DATABASE_PASSWORD. These variables should contain the database connection string and the database password, respectively. Once you have set these variables, the application will be able to access the database using the provided credentials. My own development cluster is available at the config.env file at this project, but it is recommended to create your own data base.
+
+> [!TIP]
+> Make sure that you have all that dependencies in your package.json file correctly installed.
+
+---
+
 ### **TECHNOLOGIES USED**
 
+```ruby
 The following technologies were used in the development of this project:
 
-`Node.js`: A JavaScript runtime built on Chrome's V8 JavaScript engine that allows for server-side scripting.
+Node.js: A JavaScript runtime built on Chromes V8 JavaScript engine that allows for server-side scripting.
+Express: A fast and minimalist web framework for Node.js used to create server applications.
+Mongoose: An Object Data Modeling library used for MongoDB to provide a schema-based solution to model application data.
+MongoDB: A document-oriented NoSQL database used for storing and retrieving data.
+JSON Web Tokens: A compact and self-contained way for securely transmitting information between parties as a JSON object.
+Swagger: An open-source software framework used for designing, building, documenting, and consuming RESTful web services.
+Dotenv: A zero-dependency module used for loading environment variables from a .env file into process.env.
+TypeScript: A statically-typed superset of JavaScript that compiles to plain JavaScript.
+Jest: A popular JavaScript testing framework used for writing unit tests, integration tests, and end-to-end tests.
+```
 
-`Express`: A fast and minimalist web framework for Node.js used to create server applications.
-
-`Mongoose`: An Object Data Modeling (ODM) library used for MongoDB to provide a schema-based solution to model application data.
-
-`MongoDB`: A document-oriented NoSQL database used for storing and retrieving data.
-
-`JSON Web Tokens`: A compact and self-contained way for securely transmitting information between parties as a JSON object.
-
-`Swagger`: An open-source software framework used for designing, building, documenting, and consuming RESTful web services.
-
-`Dotenv`: A zero-dependency module used for loading environment variables from a .env file into process.env.
-
-`TypeScript`: A statically-typed superset of JavaScript that compiles to plain JavaScript.
-
-`Jest` : A popular JavaScript testing framework used for writing unit tests, integration tests, and end-to-end tests for Node.js applications. Jest provides a rich set of built-in features such as test runners, assertion libraries, mocking capabilities, and code coverage analysis, making it a powerful tool for ensuring the quality and reliability of the codebase.
-
-All functionalities of the routes and the authentication system are documented in Swagger, which can be accessed at the specif route defined above after starting the local server with npm run start. The project also includes development dependencies such as `nodemon` for automatic server restarts and `ts-node` for running TypeScript files without compilation.
+---
 
 ### **UNIMPLEMENTED FEATURES**
 
@@ -88,15 +96,21 @@ By implementing pagination, the application could have provided a more scalable 
 
 While pagination is not implemented in the current project, it could have been a valuable addition to optimize the performance and user experience of the application, especially when dealing with large datasets.
 
+---
+
 ### **FEATURES TO BE ENHANCED**
 
 I conducted some unit testing using Jest for certain controllers and other folders in my architecture. However, the test coverage achieved was only 40%, which is not very satisfactory. It is evident that there is ample room for improvement in terms of test coverage. Increasing the test coverage can greatly enhance the overall quality and reliability of the codebase, as it helps to identify and fix potential issues and regressions.
+
+---
 
 ### **CONCLUSION**
 
 This project provides a simple and straightforward way for managing reserves, cars and users accounts. Whether you're creating a new reserve or deleting your account, the project has got you covered.
 
-### **AUTHORS**
+---
+
+### **AUTHOR**
 
 -   Giovane Hashinokuti Iwamoto - Computer Science student at UFMS - Brazil - MS
 
