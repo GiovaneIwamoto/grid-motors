@@ -11,11 +11,9 @@ Welcome to Grid Motors API, which empowers administrators to perform a variety o
 
 ---
 
-### **FEATURES**
-
 > CARS OPERATIONS
 
--   `CAR REGISTER` Allows authenticated users to register a car being necessary to have at least one accessory. The car fabrication year must be between 1950 and 2023. It is not able to register duplicates accessories at the same object.
+-   `CAR REGISTER` Allows auth users to register a car being necessary to have at least one accessory. The car fabrication year must be between 1950 and 2023. It is not able to register duplicates accessories at the same object.
 
 -   `CAR GET ALL` Any user can search for all registered cars at the data base and can be filtered by searching using query params passing any car attribute.
 
